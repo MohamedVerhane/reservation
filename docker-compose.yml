@@ -1,0 +1,217 @@
+services:
+
+  # ── MySQL ──
+  mysql:
+    image: mysql:8.0
+    container_name: auth-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: Auth
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis ──
+  redis:
+    image: redis:7-alpine
+    container_name: auth-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend
+    command: >
+      redis-server
+      --maxmemory 512mb
+      --maxmemory-policy allkeys-lru
+      --save 60 1000
+      --tcp-backlog 511
+      --tcp-keepalive 300
+      --hz 10
+      --dynamic-hz yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Nginx ──
+  nginx:
+    image: nginx:alpine
+    container_name: auth-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - php-app-1
+      - php-app-2
+      - php-app-3
+      - php-app-4
+    networks:
+      - backend
+
+  # ── PHP-FPM App Workers (4 instances) ──
+  php-app-1:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: auth-php-1
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+    networks:
+      - backend
+
+  php-app-2:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: auth-php-2
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - php-app-1
+    environment:
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+    networks:
+      - backend
+
+  php-app-3:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: auth-php-3
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - php-app-1
+    environment:
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+    networks:
+      - backend
+
+  php-app-4:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: auth-php-4
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - php-app-1
+    environment:
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+    networks:
+      - backend
+
+  # ── Horizon Queue Workers (2 instances) ──
+  php-horizon-1:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: auth-horizon-1
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - php-app-1
+    environment:
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+    command: supervisord -c /var/www/html/docker/supervisord/horizon.conf
+    networks:
+      - backend
+
+  php-horizon-2:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: auth-horizon-2
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - php-app-1
+    environment:
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+    command: supervisord -c /var/www/html/docker/supervisord/horizon.conf
+    networks:
+      - backend
+
+  # ── Queue Workers (4 instances) ──
+  queue-worker:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: auth-queue-worker
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - php-app-1
+    environment:
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+    command: supervisord -c /var/www/html/docker/supervisord/workers.conf
+    networks:
+      - backend
+
+  # ── Laravel Scheduler ──
+  scheduler:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: auth-scheduler
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - php-app-1
+    environment:
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+    command: >
+      sh -c "while true; do php /var/www/html/artisan schedule:run --verbose --no-interaction & sleep 60; done"
+    networks:
+      - backend
+
+volumes:
+  mysql_data:
+  redis_data:
+
+networks:
+  backend:
+    driver: bridge
