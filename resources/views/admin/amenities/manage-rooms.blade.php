@@ -142,7 +142,7 @@
             <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200">{{ __('admin.amenities.assign_rooms_section') }}</h3>
         </div>
 
-        <form method="POST" action="{{ route('admin.amenities.assign-rooms', $amenity) }}">
+        <form method="POST" action="{{ route('admin.amenities.assign-rooms', $amenity) }}" data-ajax-action data-success="{{ __('admin.amenity.room_assignments_updated') }}">
             @csrf
 
             {{-- Hotel Selector --}}

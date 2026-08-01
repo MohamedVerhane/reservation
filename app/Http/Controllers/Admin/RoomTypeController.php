@@ -97,7 +97,8 @@ class RoomTypeController extends Controller
         $roomType->delete();
 
         return redirect()->route('admin.room-types.index')
-            ->with('success', __('admin.room_type.deleted'));
+            ->with('success', __('admin.room_type.deleted'))
+            ->orJson();
     }
 
     public function toggleStatus(RoomType $roomType): RedirectResponse
@@ -108,6 +109,7 @@ class RoomTypeController extends Controller
         $roomType->refresh();
 
         return redirect()->back()
-            ->with('success', __('admin.room_type.status_updated', ['status' => $roomType->status_label]));
+            ->with('success', __('admin.room_type.status_updated', ['status' => $roomType->status_label]))
+            ->orJson();
     }
 }

@@ -1,6 +1,7 @@
-document.addEventListener('DOMContentLoaded', function () {
+function initAdminFilters() {
     const form = document.querySelector('[data-ajax-filter]');
-    if (!form) return;
+    if (!form || form.__adminFiltersBound) return;
+    form.__adminFiltersBound = true;
 
     const containerId = form.getAttribute('data-ajax-filter');
     const container = document.getElementById(containerId);
@@ -16,9 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         history.replaceState({}, '', url);
 
-        container.style.opacity = '0.4';
-        container.style.transition = 'opacity 0.2s';
-
         fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
             .then(function (res) { return res.text(); })
             .then(function (html) {
@@ -27,13 +25,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 var newContent = doc.getElementById(containerId);
                 if (newContent) {
                     container.innerHTML = newContent.innerHTML;
+                    if (window.Alpine && typeof Alpine.initTree === 'function') {
+                        Alpine.initTree(container);
+                    }
                 }
-                container.style.opacity = '1';
                 flashHandler();
             })
-            .catch(function () {
-                container.style.opacity = '1';
-            });
+            .catch(function () {});
     }
 
     function flashHandler() {
@@ -96,4 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     flashHandler();
-});
+}
+
+window.initAdminFilters = initAdminFilters;
+document.addEventListener('DOMContentLoaded', initAdminFilters);

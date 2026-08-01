@@ -78,7 +78,7 @@
                         <i class="bi bi-calendar-check"></i> {{ __('admin.action.view_reservation') }}
                     </a>
                     @if (in_array($payment->status, ['pending', 'failed']))
-                        <form action="{{ route('admin.payments.destroy', $payment) }}" method="POST" onsubmit="return confirm('{{ __("admin.confirm.delete") }}')">
+                        <form action="{{ route('admin.payments.destroy', $payment) }}" method="POST" onsubmit="return confirm('{{ __("admin.confirm.delete") }}')" data-ajax-action>
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="inline-flex items-center gap-2 rounded-xl bg-red-500/20 px-4 py-2 text-sm font-medium text-red-100 hover:bg-red-500/30">
@@ -244,7 +244,7 @@
                     <i class="bi bi-gear mr-2 text-indigo-500"></i> {{ __('admin.payments.status_actions') }}
                 </h2>
                 <div class="flex flex-wrap gap-3">
-                    <form action="{{ route('admin.payments.update-status', $payment) }}" method="POST" class="flex items-end gap-3">
+                    <form action="{{ route('admin.payments.update-status', $payment) }}" method="POST" class="flex items-end gap-3" data-ajax-action>
                         @csrf
                         @method('PATCH')
                         <input type="hidden" name="status" value="completed" />
@@ -262,7 +262,7 @@
                             <i class="bi bi-check-circle mr-1"></i> {{ __('admin.payments.mark_completed') }}
                         </button>
                     </form>
-                    <form action="{{ route('admin.payments.update-status', $payment) }}" method="POST" class="inline" onsubmit="return confirm('{{ __("admin.confirm.mark_failed") }}')">
+                    <form action="{{ route('admin.payments.update-status', $payment) }}" method="POST" class="inline" onsubmit="return confirm('{{ __("admin.confirm.mark_failed") }}')" data-ajax-action>
                         @csrf
                         @method('PATCH')
                         <input type="hidden" name="status" value="failed" />
@@ -277,7 +277,7 @@
                 <h2 class="mb-4 text-lg font-bold text-slate-900 dark:text-white">
                     <i class="bi bi-gear mr-2 text-indigo-500"></i> {{ __('admin.payments.status_actions') }}
                 </h2>
-                <form action="{{ route('admin.payments.update-status', $payment) }}" method="POST" class="inline" onsubmit="return confirm('{{ __("admin.confirm.refund_payment") }}')">
+                <form action="{{ route('admin.payments.update-status', $payment) }}" method="POST" class="inline" onsubmit="return confirm('{{ __("admin.confirm.refund_payment") }}')" data-ajax-action>
                     @csrf
                     @method('PATCH')
                     <input type="hidden" name="status" value="refunded" />

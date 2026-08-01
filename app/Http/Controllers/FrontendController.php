@@ -160,7 +160,8 @@ class FrontendController extends Controller
                 ->replyTo($validated['email'], $validated['name']);
         });
 
-        return redirect()->route('frontend.contact')->with('success', __('contact.success'));
+        return redirect()->route('frontend.contact')->with('success', __('contact.success'))
+            ->orJson();
     }
 
     public function gallery(Request $request): View

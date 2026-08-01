@@ -96,7 +96,8 @@ class PaymentController extends Controller
         $statusLabel = ucfirst($request->status);
 
         return redirect()->route('admin.payments.show', $payment)
-            ->with('success', __('admin.payment.updated', ['status' => $statusLabel]));
+            ->with('success', __('admin.payment.updated', ['status' => $statusLabel]))
+            ->orJson();
     }
 
     public function destroy(Payment $payment): RedirectResponse
@@ -105,12 +106,14 @@ class PaymentController extends Controller
 
         if (!in_array($payment->status, ['pending', 'failed'])) {
             return redirect()->route('admin.payments.index')
-                ->with('error', __('admin.payment.cannot_delete'));
+                ->with('error', __('admin.payment.cannot_delete'))
+                ->orJson();
         }
 
         $payment->delete();
 
         return redirect()->route('admin.payments.index')
-            ->with('success', __('admin.payment.deleted'));
+            ->with('success', __('admin.payment.deleted'))
+            ->orJson();
     }
 }

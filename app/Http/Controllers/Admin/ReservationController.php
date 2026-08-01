@@ -142,7 +142,8 @@ class ReservationController extends Controller
         $reservation->delete();
 
         return redirect()->route('admin.reservations.index')
-            ->with('success', __('admin.reservation.deleted'));
+            ->with('success', __('admin.reservation.deleted'))
+            ->orJson();
     }
 
     public function confirm(Reservation $reservation): RedirectResponse
@@ -150,14 +151,15 @@ class ReservationController extends Controller
         $this->authorize('update', $reservation);
 
         if ($reservation->status !== Reservation::STATUS_PENDING) {
-            return redirect()->back()->with('error', __('admin.reservation.cannot_confirm'));
+            return redirect()->back()->with('error', __('admin.reservation.cannot_confirm'))->orJson();
         }
 
         $reservation->confirm();
         $reservation->load(['user', 'hotel', 'room']);
         $reservation->user->notify(new BookingConfirmed($reservation));
 
-        return redirect()->back()->with('success', __('admin.reservation.confirmed'));
+        return redirect()->back()->with('success', __('admin.reservation.confirmed'))
+            ->orJson();
     }
 
     public function checkIn(Reservation $reservation): RedirectResponse
@@ -165,12 +167,13 @@ class ReservationController extends Controller
         $this->authorize('update', $reservation);
 
         if (!$reservation->canBeCheckedIn()) {
-            return redirect()->back()->with('error', __('admin.reservation.cannot_checkin'));
+            return redirect()->back()->with('error', __('admin.reservation.cannot_checkin'))->orJson();
         }
 
         $reservation->checkIn();
 
-        return redirect()->back()->with('success', __('admin.reservation.checked_in'));
+        return redirect()->back()->with('success', __('admin.reservation.checked_in'))
+            ->orJson();
     }
 
     public function checkOut(Reservation $reservation): RedirectResponse
@@ -178,12 +181,13 @@ class ReservationController extends Controller
         $this->authorize('update', $reservation);
 
         if (!$reservation->canBeCheckedOut()) {
-            return redirect()->back()->with('error', __('admin.reservation.cannot_checkout'));
+            return redirect()->back()->with('error', __('admin.reservation.cannot_checkout'))->orJson();
         }
 
         $reservation->checkOut();
 
-        return redirect()->back()->with('success', __('admin.reservation.checked_out'));
+        return redirect()->back()->with('success', __('admin.reservation.checked_out'))
+            ->orJson();
     }
 
     public function cancel(Reservation $reservation): RedirectResponse
@@ -191,14 +195,15 @@ class ReservationController extends Controller
         $this->authorize('update', $reservation);
 
         if (!$reservation->canBeCancelled()) {
-            return redirect()->back()->with('error', __('admin.reservation.cannot_cancel'));
+            return redirect()->back()->with('error', __('admin.reservation.cannot_cancel'))->orJson();
         }
 
         $reservation->cancel();
         $reservation->load(['user', 'hotel', 'room']);
         $reservation->user->notify(new BookingCancelled($reservation, __('admin.reservation.cancelled_by_admin')));
 
-        return redirect()->back()->with('success', __('admin.reservation.cancelled'));
+        return redirect()->back()->with('success', __('admin.reservation.cancelled'))
+            ->orJson();
     }
 
     public function toggleStatus(Reservation $reservation): RedirectResponse
@@ -218,7 +223,8 @@ class ReservationController extends Controller
         $nextIndex = ($currentIndex + 1) % count($statuses);
         $reservation->update(['status' => $statuses[$nextIndex]]);
 
-        return redirect()->back()->with('success', __('admin.reservation.status_updated', ['status' => $reservation->status_label]));
+        return redirect()->back()->with('success', __('admin.reservation.status_updated', ['status' => $reservation->status_label]))
+            ->orJson();
     }
 
     public function getRooms(Hotel $hotel, Request $request): JsonResponse

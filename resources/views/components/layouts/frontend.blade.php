@@ -27,7 +27,7 @@
 
     <x-frontend.navbar />
 
-    <main class="pt-16 lg:pt-[4.25rem]">
+    <main data-ajax-page class="pt-16 lg:pt-[4.25rem]">
         {{ $slot }}
     </main>
 
@@ -63,5 +63,7 @@
         })();
     </script>
     @stack('scripts')
+
+    <div class="ajax-toast-container" aria-live="polite"></div>
 </body>
 </html>

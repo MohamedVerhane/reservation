@@ -59,7 +59,7 @@
                 </div>
                 <div class="flex items-center gap-2 flex-wrap">
                     @if ($reservation->status === 'pending')
-                        <form method="POST" action="{{ route('admin.reservations.confirm', $reservation) }}">
+                        <form method="POST" action="{{ route('admin.reservations.confirm', $reservation) }}" data-ajax-action>
                             @csrf
                             <button type="submit"
                                 class="inline-flex items-center gap-2 rounded-xl border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/30 px-4 py-2 text-sm font-semibold text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors">
@@ -69,7 +69,7 @@
                     @endif
 
                     @if ($reservation->canBeCheckedIn())
-                        <form method="POST" action="{{ route('admin.reservations.check-in', $reservation) }}">
+                        <form method="POST" action="{{ route('admin.reservations.check-in', $reservation) }}" data-ajax-action>
                             @csrf
                             <button type="submit"
                                 class="inline-flex items-center gap-2 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/30 px-4 py-2 text-sm font-semibold text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors">
@@ -79,7 +79,7 @@
                     @endif
 
                     @if ($reservation->canBeCheckedOut())
-                        <form method="POST" action="{{ route('admin.reservations.check-out', $reservation) }}">
+                        <form method="POST" action="{{ route('admin.reservations.check-out', $reservation) }}" data-ajax-action>
                             @csrf
                             <button type="submit"
                                 class="inline-flex items-center gap-2 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/30 px-4 py-2 text-sm font-semibold text-amber-700 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-900/50 transition-colors">
@@ -90,7 +90,7 @@
 
                     @if ($reservation->canBeCancelled())
                         <form method="POST" action="{{ route('admin.reservations.cancel', $reservation) }}"
-                            x-data x-on:submit="return confirm('{{ __("admin.confirm.cancel_reservation") }}')">
+                            x-data x-on:submit="return confirm('{{ __("admin.confirm.cancel_reservation") }}')" data-ajax-action>
                             @csrf
                             <button type="submit"
                                 class="inline-flex items-center gap-2 rounded-xl border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950/30 px-4 py-2 text-sm font-semibold text-red-700 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors">
@@ -99,7 +99,7 @@
                         </form>
                     @endif
 
-                    <form method="POST" action="{{ route('admin.reservations.toggle', $reservation) }}">
+                    <form method="POST" action="{{ route('admin.reservations.toggle', $reservation) }}" data-ajax-action>
                         @csrf
                         @method('PATCH')
                         <button type="submit"
@@ -226,7 +226,7 @@
         {{-- Inline Payment Form --}}
         @if ($reservation->status !== 'cancelled')
             <div class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20">
-                <form method="POST" action="{{ route('admin.payments.store') }}" class="flex flex-col sm:flex-row items-stretch sm:items-end gap-3" x-data="{ processing: false }" x-on:submit="processing = true">
+                <form method="POST" action="{{ route('admin.payments.store') }}" class="flex flex-col sm:flex-row items-stretch sm:items-end gap-3" x-data="{ processing: false }" x-on:submit="processing = true" data-ajax-action data-success="{{ __('admin.payment.created') }}">
                     @csrf
                     <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
 

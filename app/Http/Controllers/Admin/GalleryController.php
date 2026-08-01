@@ -96,7 +96,8 @@ class GalleryController extends Controller
         $gallery->delete();
 
         return redirect()->route('admin.galleries.index')
-            ->with('success', __('admin.gallery.deleted'));
+            ->with('success', __('admin.gallery.deleted'))
+            ->orJson();
     }
 
     public function uploadImages(Request $request, Gallery $gallery): RedirectResponse
@@ -110,7 +111,8 @@ class GalleryController extends Controller
 
         $this->handleImageUpload($gallery, $request);
 
-        return redirect()->back()->with('success', __('admin.gallery.images_uploaded'));
+        return redirect()->back()->with('success', __('admin.gallery.images_uploaded'))
+            ->orJson();
     }
 
     public function deleteImage(Gallery $gallery, Image $image): RedirectResponse
@@ -121,7 +123,8 @@ class GalleryController extends Controller
 
         $image->deleteFromStorage();
 
-        return redirect()->back()->with('success', __('admin.gallery.image_deleted'));
+        return redirect()->back()->with('success', __('admin.gallery.image_deleted'))
+            ->orJson();
     }
 
     private function handleImageUpload(Gallery $gallery, Request $request): void

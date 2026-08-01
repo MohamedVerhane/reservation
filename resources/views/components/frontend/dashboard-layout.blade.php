@@ -88,7 +88,7 @@
                             <i class="bi {{ $item['icon'] }} text-lg {{ request()->routeIs($item['route']) ? 'text-[var(--gold)]' : '' }}"></i>
                             {{ $item['label'] }}
                             @if(isset($item['badge']) && $item['badge'])
-                                <span class="ms-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white px-1">{{ $item['badge'] > 9 ? '9+' : $item['badge'] }}</span>
+                                <span data-notif-badge class="ms-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white px-1">{{ $item['badge'] > 9 ? '9+' : $item['badge'] }}</span>
                             @elseif(request()->routeIs($item['route']))
                                 <span class="ms-auto w-1.5 h-1.5 rounded-full bg-[var(--gold)]"></span>
                             @endif
@@ -99,7 +99,7 @@
 
             <div data-dashboard-sidebar-overlay class="fixed inset-0 z-30 bg-black/50 backdrop-blur-sm md:hidden hidden"></div>
 
-            <main class="flex-1 min-w-0">
+            <main data-ajax-page class="flex-1 min-w-0">
                 {{ $slot }}
             </main>
         </div>
@@ -159,5 +159,7 @@
         })();
     </script>
     @stack('scripts')
+
+    <div class="ajax-toast-container" aria-live="polite"></div>
 </body>
 </html>

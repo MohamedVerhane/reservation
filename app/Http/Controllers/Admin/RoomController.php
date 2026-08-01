@@ -145,7 +145,8 @@ class RoomController extends Controller
         $room->delete();
 
         return redirect()->route('admin.rooms.index')
-            ->with('success', __('admin.room.deleted'));
+            ->with('success', __('admin.room.deleted'))
+            ->orJson();
     }
 
     public function toggleStatus(Room $room): RedirectResponse
@@ -158,7 +159,8 @@ class RoomController extends Controller
         $room->update(['status' => $statuses[$nextIndex]]);
 
         return redirect()->back()
-            ->with('success', __('admin.room.status_updated', ['status' => $room->status_label]));
+            ->with('success', __('admin.room.status_updated', ['status' => $room->status_label]))
+            ->orJson();
     }
 
     public function uploadImage(Request $request, Room $room): RedirectResponse
@@ -180,7 +182,8 @@ class RoomController extends Controller
             'is_primary' => $room->images()->count() === 0,
         ]);
 
-        return redirect()->back()->with('success', __('admin.room.image_uploaded'));
+        return redirect()->back()->with('success', __('admin.room.image_uploaded'))
+            ->orJson();
     }
 
     public function deleteImage(Room $room, RoomImage $image): RedirectResponse
@@ -194,7 +197,8 @@ class RoomController extends Controller
         Storage::disk('public')->delete($image->path);
         $image->delete();
 
-        return redirect()->back()->with('success', __('admin.room.image_deleted'));
+        return redirect()->back()->with('success', __('admin.room.image_deleted'))
+            ->orJson();
     }
 
     public function setPrimary(Room $room, RoomImage $image): RedirectResponse
@@ -204,7 +208,8 @@ class RoomController extends Controller
         $room->images()->where('is_primary', true)->update(['is_primary' => false]);
         $image->update(['is_primary' => true]);
 
-        return redirect()->back()->with('success', __('admin.room.primary_image_updated'));
+        return redirect()->back()->with('success', __('admin.room.primary_image_updated'))
+            ->orJson();
     }
 
     private function uploadImages(Room $room, StoreRoomRequest|UpdateRoomRequest $request): void

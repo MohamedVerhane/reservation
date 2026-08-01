@@ -3,6 +3,7 @@ import Alpine from "alpinejs";
 import "./admin-filters";
 import "./admin-forms";
 import "./room-type-filter";
+import "./ajax-actions";
 
 window.Alpine = Alpine;
 Alpine.start();
@@ -92,24 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (openIcon && closeIcon) {
                 openIcon.style.display = isOpen ? "inline" : "none";
                 closeIcon.style.display = isOpen ? "none" : "inline";
-            }
-        });
-    });
-
-    // ── Button loading state on submit (AJAX forms handle their own state) ──
-    document.querySelectorAll("form:not([data-ajax])").forEach((form) => {
-        form.addEventListener("submit", () => {
-            const btn = form.querySelector('button[type="submit"]');
-            if (btn && !btn.dataset.loading) {
-                btn.dataset.loading = "true";
-                btn.disabled = true;
-                const text = btn.textContent;
-                btn.innerHTML = `<span class="btn-spinner"></span>`;
-                setTimeout(() => {
-                    btn.innerHTML = text;
-                    btn.disabled = false;
-                    delete btn.dataset.loading;
-                }, 5000);
             }
         });
     });

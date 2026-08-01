@@ -6,7 +6,7 @@
             <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">{{ $unreadCount }} {{ __('auth.notif_unread') }}</p>
         </div>
         @if($unreadCount > 0)
-            <form method="POST" action="{{ route('notifications.mark-all-read') }}">
+            <form method="POST" action="{{ route('notifications.mark-all-read') }}" data-ajax-action data-success="{{ __('auth.notif_all_read') }}">
                 @csrf
                 <button type="submit" class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all">
                     <i class="bi bi-check-all text-sm"></i> {{ __('auth.notif_mark_all_read') }}
@@ -67,14 +67,14 @@
 
                 <div class="flex items-center gap-1 shrink-0">
                     @unless($notification->read_at)
-                        <form method="POST" action="{{ route('notifications.mark-read', $notification->id) }}">
+                        <form method="POST" action="{{ route('notifications.mark-read', $notification->id) }}" data-ajax-action data-success="{{ __('auth.notif_mark_read') }}">
                             @csrf
                             <button type="submit" class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 transition-colors" title="{{ __('auth.notif_mark_read') }}">
                                 <i class="bi bi-check2 text-sm"></i>
                             </button>
                         </form>
                     @endunless
-                    <form method="POST" action="{{ route('notifications.destroy', $notification->id) }}" x-data x-on:submit="return confirm('{{ __('auth.notif_delete_confirm') }}')">
+                    <form method="POST" action="{{ route('notifications.destroy', $notification->id) }}" data-ajax-action data-success="{{ __('auth.notif_delete') }}" x-data x-on:submit="return confirm('{{ __('auth.notif_delete_confirm') }}')">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors" title="{{ __('auth.notif_delete') }}">

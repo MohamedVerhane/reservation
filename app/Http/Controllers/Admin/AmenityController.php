@@ -79,13 +79,15 @@ class AmenityController extends Controller
     {
         if ($amenity->rooms()->count() > 0) {
             return redirect()->route('admin.amenities.index')
-                ->with('error', __('admin.amenity.cannot_delete_assigned'));
+                ->with('error', __('admin.amenity.cannot_delete_assigned'))
+                ->orJson();
         }
 
         $amenity->delete();
 
         return redirect()->route('admin.amenities.index')
-            ->with('success', __('admin.amenity.deleted'));
+            ->with('success', __('admin.amenity.deleted'))
+            ->orJson();
     }
 
     public function toggleStatus(Amenity $amenity): RedirectResponse
@@ -96,7 +98,8 @@ class AmenityController extends Controller
         $amenity->refresh();
 
         return redirect()->back()
-            ->with('success', __('admin.amenity.status_updated', ['status' => $amenity->status_label]));
+            ->with('success', __('admin.amenity.status_updated', ['status' => $amenity->status_label]))
+            ->orJson();
     }
 
     public function manageRooms(Amenity $amenity): View
@@ -120,7 +123,8 @@ class AmenityController extends Controller
         $amenity->rooms()->sync($request->room_ids ?? []);
 
         return redirect()->route('admin.amenities.manage-rooms', $amenity)
-            ->with('success', __('admin.amenity.room_assignments_updated'));
+            ->with('success', __('admin.amenity.room_assignments_updated'))
+            ->orJson();
     }
 
     public function getRooms(Request $request): \Illuminate\Http\JsonResponse

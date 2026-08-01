@@ -72,7 +72,7 @@
                 </div>
             </header>
 
-            <main class="flex-1 min-w-0 p-4 lg:p-6">
+            <main data-ajax-page class="flex-1 min-w-0 p-4 lg:p-6">
                 {{ $slot }}
             </main>
         </div>

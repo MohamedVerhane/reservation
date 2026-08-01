@@ -58,7 +58,7 @@
                         class="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                         <i class="bi bi-pencil text-sm"></i> {{ __('admin.action.edit') }}
                     </a>
-                    <form method="POST" action="{{ route('admin.rooms.toggle', $room) }}">
+                    <form method="POST" action="{{ route('admin.rooms.toggle', $room) }}" data-ajax-action>
                         @csrf
                         @method('PATCH')
                         <button type="submit" class="inline-flex items-center gap-2 rounded-xl border px-4 py-2 text-sm font-semibold shadow-sm transition-colors
@@ -147,7 +147,7 @@
     {{-- Upload form --}}
     <div class="mt-6 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-violet-50/60 dark:bg-slate-900 p-6">
         <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-4">{{ __('admin.rooms.add_images') }}</h3>
-        <form method="POST" action="{{ route('admin.rooms.images.upload', $room) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.rooms.images.upload', $room) }}" enctype="multipart/form-data" data-ajax-action data-success="{{ __('admin.room.image_uploaded') }}">
             @csrf
             <div class="flex flex-col sm:flex-row items-stretch sm:items-end gap-3">
                 <div class="flex-1">

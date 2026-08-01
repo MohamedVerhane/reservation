@@ -45,11 +45,6 @@
                 <span class="w-9 h-5 bg-slate-200 dark:bg-slate-700 rounded-full peer peer-checked:bg-red-500 relative after:content-[''] after:absolute after:top-0.5 after:start-0.5 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-4"></span>
                 <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">{{ __('admin.filter.trashed') }}</span>
             </label>
-
-            <button type="submit"
-                class="inline-flex items-center gap-2 rounded-xl bg-slate-900 dark:bg-slate-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors">
-                <i class="bi bi-funnel text-sm"></i> {{ __('admin.action.filter') }}
-            </button>
         </form>
     </div>
 
@@ -104,7 +99,7 @@
                                         {{ __('admin.hotels.deleted') }}
                                     </span>
                                 @else
-                                    <form method="POST" action="{{ route('admin.hotels.toggle', $hotel) }}" class="inline">
+                                    <form method="POST" action="{{ route('admin.hotels.toggle', $hotel) }}" class="inline" data-ajax-action>
                                         @csrf
                                         @method('PATCH')
                                         <button type="submit"
@@ -120,7 +115,7 @@
                             <td class="px-6 py-3.5">
                                 <div class="flex items-center justify-end gap-1">
                                     @if ($hotel->trashed())
-                                        <form method="POST" action="{{ route('admin.hotels.restore', $hotel) }}">
+                                        <form method="POST" action="{{ route('admin.hotels.restore', $hotel) }}" data-ajax-action>
                                             @csrf
                                             @method('PATCH')
                                             <button type="submit" title="{{ __('admin.action.restore') }}"
@@ -129,7 +124,7 @@
                                             </button>
                                         </form>
                                         <form method="POST" action="{{ route('admin.hotels.force-delete', $hotel) }}"
-                                            x-data x-on:submit="return confirm('{{ __("admin.confirm.permanent_delete") }}')">
+                                            x-data x-on:submit="return confirm('{{ __("admin.confirm.permanent_delete") }}')" data-ajax-action>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" title="{{ __('admin.action.force_delete') }}"
@@ -147,7 +142,7 @@
                                             <i class="bi bi-pencil text-sm"></i>
                                         </a>
                                         <form method="POST" action="{{ route('admin.hotels.destroy', $hotel) }}"
-                                            x-data x-on:submit="return confirm('{{ __("admin.confirm.delete") }}')">
+                                            x-data x-on:submit="return confirm('{{ __("admin.confirm.delete") }}')" data-ajax-action>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" title="{{ __("admin.action.delete") }}"

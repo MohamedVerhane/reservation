@@ -50,6 +50,13 @@
                                             'Accept': 'application/json'
                                         },
                                         body: JSON.stringify({ hotel_id: {{ $hotel->id }} })
+                                    }).then(r => r.json()).then(d => {
+                                        if (d.is_favorited === false) {
+                                            let card = $el.closest('.group');
+                                            card.style.opacity = '0';
+                                            card.style.transform = 'scale(0.95)';
+                                            setTimeout(() => card.remove(), 300);
+                                        }
                                     })
                                 "
                                 class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center transition-all duration-300 hover:bg-white/40"

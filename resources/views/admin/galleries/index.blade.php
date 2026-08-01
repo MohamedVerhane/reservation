@@ -38,11 +38,6 @@
                     <option value="{{ $id }}" {{ request('hotel_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
                 @endforeach
             </select>
-
-            <button type="submit"
-                class="inline-flex items-center gap-2 rounded-xl bg-slate-900 dark:bg-slate-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors">
-                <i class="bi bi-funnel text-sm"></i> {{ __('admin.action.filter') }}
-            </button>
         </form>
     </div>
 
@@ -90,7 +85,7 @@
                             <i class="bi bi-pencil text-sm"></i> {{ __("admin.action.edit") }}
                         </a>
                         <form method="POST" action="{{ route('admin.galleries.destroy', $gallery) }}"
-                            x-data x-on:submit="return confirm('{{ __("admin.confirm.gallery_delete") }}')" class="ms-auto">
+                            x-data x-on:submit="return confirm('{{ __("admin.confirm.gallery_delete") }}')" class="ms-auto" data-ajax-action>
                             @csrf
                             @method('DELETE')
                             <button type="submit" title="{{ __("admin.action.delete") }}"

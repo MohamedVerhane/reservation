@@ -49,7 +49,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('contact.send') }}" method="POST" class="space-y-5">
+                <form action="{{ route('contact.send') }}" method="POST" class="space-y-5" data-ajax-action data-success="{{ __('contact.success') }}">
                     @csrf
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div class="form-label">

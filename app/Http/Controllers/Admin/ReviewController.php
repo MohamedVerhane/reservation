@@ -77,7 +77,8 @@ class ReviewController extends Controller
         $review->user->notify(new ReviewReplyReceived($review));
 
         return redirect()->route('admin.reviews.show', $review)
-            ->with('success', __('admin.review.reply_sent'));
+            ->with('success', __('admin.review.reply_sent'))
+            ->orJson();
     }
 
     public function approve(Review $review): RedirectResponse
@@ -89,7 +90,8 @@ class ReviewController extends Controller
         $review->user->notify(new ReviewApproved($review));
 
         return redirect()->back()
-            ->with('success', __('auth.review_approved'));
+            ->with('success', __('auth.review_approved'))
+            ->orJson();
     }
 
     public function reject(Review $review): RedirectResponse
@@ -99,7 +101,8 @@ class ReviewController extends Controller
         $review->reject();
 
         return redirect()->back()
-            ->with('success', __('auth.review_rejected'));
+            ->with('success', __('auth.review_rejected'))
+            ->orJson();
     }
 
     public function destroy(Review $review): RedirectResponse
@@ -109,7 +112,8 @@ class ReviewController extends Controller
         $review->delete();
 
         return redirect()->route('admin.reviews.index')
-            ->with('success', __('admin.review.deleted'));
+            ->with('success', __('admin.review.deleted'))
+            ->orJson();
     }
 
     public function restore(int $id): RedirectResponse
@@ -120,6 +124,7 @@ class ReviewController extends Controller
         $review->restore();
 
         return redirect()->route('admin.reviews.index', ['trashed' => '1'])
-            ->with('success', __('admin.review.restored'));
+            ->with('success', __('admin.review.restored'))
+            ->orJson();
     }
 }

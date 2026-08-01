@@ -28,14 +28,14 @@ class NotificationController extends Controller
 
         $notification->markAsRead();
 
-        return redirect()->back();
+        return redirect()->back()->orJson();
     }
 
     public function markAllRead(Request $request): RedirectResponse
     {
         $request->user()->unreadNotifications()->update(['read_at' => now()]);
 
-        return redirect()->back()->with('success', __('auth.notif_all_read'));
+        return redirect()->back()->with('success', __('auth.notif_all_read'))->orJson();
     }
 
     public function destroy(DatabaseNotification $notification): RedirectResponse
@@ -44,7 +44,7 @@ class NotificationController extends Controller
 
         $notification->delete();
 
-        return redirect()->back();
+        return redirect()->back()->orJson();
     }
 
     public function adminIndex(Request $request): View

@@ -1,6 +1,6 @@
 @props(['viewAllRoute' => 'admin.notifications', 'limit' => 5])
 
-<div class="relative" x-data="{ open: false }" @click.away="open = false">
+<div class="relative" x-data="{ open: false }" @click.away="open = false" data-notifications-dropdown>
     <button @click="open = !open" type="button"
         {{ $attributes->merge(['class' => 'relative cursor-pointer transition-all duration-200']) }}>
         <i class="bi bi-bell text-sm"></i>
@@ -16,7 +16,7 @@
         <div class="flex items-center justify-between px-4 py-3 border-b border-[var(--border-light)]">
             <h3 class="text-sm font-bold text-[var(--text-primary)]">{{ __('auth.notif_title') }}</h3>
             @if($unread > 0)
-                <form method="POST" action="{{ route('notifications.mark-all-read') }}">
+                <form method="POST" action="{{ route('notifications.mark-all-read') }}" data-ajax-action data-success="{{ __('auth.notif_all_read') }}">
                     @csrf
                     <button type="submit" class="text-xs text-[var(--gold)] hover:underline font-semibold cursor-pointer">{{ __('auth.notif_mark_all_read') }}</button>
                 </form>
@@ -35,7 +35,7 @@
                             <p class="text-[10px] text-[var(--text-muted)] mt-1">{{ $notif->created_at->diffForHumans() }}</p>
                         </div>
                         @unless($notif->read_at)
-                            <form method="POST" action="{{ route('notifications.mark-read', $notif->id) }}">
+                            <form method="POST" action="{{ route('notifications.mark-read', $notif->id) }}" data-ajax-action data-success="{{ __('auth.notif_mark_read') }}">
                                 @csrf
                                 <button type="submit" class="text-[var(--text-muted)] hover:text-[var(--gold)] cursor-pointer"><i class="bi bi-check2 text-sm"></i></button>
                             </form>

@@ -56,9 +56,6 @@
                 <option value="room_number" {{ request('sort') === 'room_number' ? 'selected' : '' }}>{{ __('admin.th.room_number') }}</option>
                 <option value="floor" {{ request('sort') === 'floor' ? 'selected' : '' }}>{{ __('admin.th.floor') }}</option>
             </select>
-            <button type="submit" class="inline-flex items-center gap-2 rounded-xl bg-slate-900 dark:bg-slate-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors">
-                <i class="bi bi-funnel text-sm"></i> {{ __('admin.action.filter') }}
-            </button>
         </form>
     </div>
 
@@ -101,7 +98,7 @@
                             <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200">{{ __('admin.rooms.room_label', ['number' => $room->room_number]) }}</h3>
                             <p class="text-xs text-slate-400 dark:text-slate-500 truncate">{{ $room->hotel->name ?? __('admin.common.na') }}</p>
                         </div>
-                        <form method="POST" action="{{ route('admin.rooms.toggle', $room) }}">
+                        <form method="POST" action="{{ route('admin.rooms.toggle', $room) }}" data-ajax-action>
                             @csrf
                             @method('PATCH')
                             <button type="submit" class="inline-flex h-7 items-center rounded-full px-2 text-[9px] font-bold cursor-pointer transition-colors
@@ -140,7 +137,7 @@
                     <a href="{{ route('admin.rooms.edit', $room) }}" title="{{ __("admin.action.edit") }}" class="flex-1 flex items-center justify-center gap-1 px-3 py-2.5 text-xs font-semibold text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 transition-colors">
                         <i class="bi bi-pencil"></i>
                     </a>
-                    <form method="POST" action="{{ route('admin.rooms.destroy', $room) }}" class="flex-1" x-data x-on:submit="return confirm('{{ __("admin.confirm.delete") }}')">
+                    <form method="POST" action="{{ route('admin.rooms.destroy', $room) }}" class="flex-1" x-data x-on:submit="return confirm('{{ __("admin.confirm.delete") }}')" data-ajax-action>
                         @csrf
                         @method('DELETE')
                         <button type="submit" title="{{ __("admin.action.delete") }}" class="flex items-center justify-center gap-1 w-full px-3 py-2.5 text-xs font-semibold text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors">

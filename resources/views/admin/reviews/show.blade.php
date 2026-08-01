@@ -79,7 +79,7 @@
                         <p class="text-sm text-emerald-800 dark:text-emerald-300 leading-relaxed whitespace-pre-wrap">{{ $review->reply }}</p>
                     </div>
                 @else
-                    <form method="POST" action="{{ route('admin.reviews.reply', $review) }}">
+                    <form method="POST" action="{{ route('admin.reviews.reply', $review) }}" data-ajax-action data-success="{{ __('admin.review.reply_sent') }}">
                         @csrf
                         @method('PATCH')
                         <div>
@@ -225,7 +225,7 @@
                     </div>
                     <div class="pt-2">
                         @if (! $review->is_approved)
-                            <form method="POST" action="{{ route('admin.reviews.approve', $review) }}">
+                            <form method="POST" action="{{ route('admin.reviews.approve', $review) }}" data-ajax-action>
                                 @csrf
                                 @method('PATCH')
                                 <button type="submit"
@@ -234,7 +234,7 @@
                                 </button>
                             </form>
                         @else
-                            <form method="POST" action="{{ route('admin.reviews.reject', $review) }}">
+                            <form method="POST" action="{{ route('admin.reviews.reject', $review) }}" data-ajax-action>
                                 @csrf
                                 @method('PATCH')
                                 <button type="submit"

@@ -45,6 +45,8 @@
                         <i class="bi bi-bookmark"></i> {{ __('auth.booking_my_reservations') }}
                     </a>
 
+                    <x-notifications-dropdown viewAllRoute="customer.notifications" class="p-2 btn-ghost text-[var(--text-muted)]" />
+
                     {{-- User menu --}}
                     <div class="relative" x-data="{ show: false }" @click.outside="show = false">
                         <button @click="show = !show" class="flex items-center gap-2 rounded-full p-1 pr-2 hover:bg-[var(--surface-alt)] transition-colors">
@@ -130,6 +132,9 @@
                 @endif
                 <a href="{{ route('frontend.booking.my-reservations') }}" @click="open = false" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-[var(--text-secondary)] hover:bg-[var(--surface-alt)]">
                     <i class="bi bi-bookmark"></i> {{ __('auth.booking_my_reservations') }}
+                </a>
+                <a href="{{ route('customer.notifications') }}" @click="open = false" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-[var(--text-secondary)] hover:bg-[var(--surface-alt)]">
+                    <i class="bi bi-bell"></i> {{ __('notifications.title') }}
                 </a>
                 <a href="{{ url('/profile') }}" @click="open = false" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-[var(--text-secondary)] hover:bg-[var(--surface-alt)]">
                     <i class="bi bi-person"></i> {{ __('auth.profile') }}

@@ -43,8 +43,12 @@ class AppServiceProvider extends ServiceProvider
             $success = session('success');
             session()->forget('success');
 
+            $error = session('error');
+            session()->forget('error');
+
             return response()->json([
                 'success' => $success,
+                'error' => $error,
                 'redirect' => $this->getTargetUrl(),
             ], 201);
         });

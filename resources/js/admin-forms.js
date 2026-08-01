@@ -2,7 +2,6 @@
  * AJAX form submission for admin create pages.
  *
  * Any form with the `data-ajax` attribute submits via fetch():
- *  - Shows a loading spinner on the submit button.
  *  - On 201/2xx JSON response: shows a success toast, then redirects to
  *    the URL provided by the server (`data.redirect`).
  *  - On 422: renders the validation summary + per-field errors inline.
@@ -10,8 +9,6 @@
  */
 document.addEventListener("DOMContentLoaded", () => {
     const SUCCESS_MSG = document.body.dataset.ajaxSuccess || "Saved successfully!";
-
-    const loadingHtml = '<span class="inline-flex items-center gap-2"><i class="bi bi-arrow-repeat animate-spin"></i></span>';
 
     function escapeCss(value) {
         if (window.CSS && CSS.escape) return CSS.escape(value);
@@ -126,17 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function setButtonLoading(btn, loading) {
         if (!btn) return;
-        if (loading) {
-            btn.dataset.originalHtml = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = loadingHtml;
-        } else {
-            if (btn.dataset.originalHtml) {
-                btn.innerHTML = btn.dataset.originalHtml;
-                delete btn.dataset.originalHtml;
-            }
-            btn.disabled = false;
-        }
+        btn.disabled = loading;
     }
 
     document.querySelectorAll("form[data-ajax]").forEach((form) => {
@@ -191,7 +178,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (data && data.redirect) {
                         showToast(data.success || form.dataset.success || SUCCESS_MSG);
                         setTimeout(() => {
-                            window.location.href = data.redirect;
+                            if (window.navigateAjax) window.navigateAjax(data.redirect);
+                            else window.location.href = data.redirect;
                         }, 500);
                     } else {
                         showAlert(form, "success", data?.success || form.dataset.success || SUCCESS_MSG, []);

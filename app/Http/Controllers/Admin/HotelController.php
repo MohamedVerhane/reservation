@@ -100,7 +100,8 @@ class HotelController extends Controller
         $hotel->delete();
 
         return redirect()->route('admin.hotels.index')
-            ->with('success', __('admin.hotel.deleted'));
+            ->with('success', __('admin.hotel.deleted'))
+            ->orJson();
     }
 
     public function restore(int $id): RedirectResponse
@@ -111,7 +112,8 @@ class HotelController extends Controller
         $hotel->restore();
 
         return redirect()->route('admin.hotels.index', ['trashed' => '1'])
-            ->with('success', __('admin.hotel.restored'));
+            ->with('success', __('admin.hotel.restored'))
+            ->orJson();
     }
 
     public function forceDelete(int $id): RedirectResponse
@@ -126,7 +128,8 @@ class HotelController extends Controller
         $hotel->forceDelete();
 
         return redirect()->route('admin.hotels.index', ['trashed' => '1'])
-            ->with('success', __('admin.hotel.permanently_deleted'));
+            ->with('success', __('admin.hotel.permanently_deleted'))
+            ->orJson();
     }
 
     public function toggleStatus(Hotel $hotel): RedirectResponse
@@ -137,6 +140,7 @@ class HotelController extends Controller
         $hotel->refresh();
 
         return redirect()->back()
-            ->with('success', __('admin.hotel.status_updated', ['status' => $hotel->status_label]));
+            ->with('success', __('admin.hotel.status_updated', ['status' => $hotel->status_label]))
+            ->orJson();
     }
 }

@@ -29,7 +29,7 @@
                     class="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                     <i class="bi bi-pencil text-sm"></i> {{ __('admin.action.edit') }}
                 </a>
-                <form method="POST" action="{{ route('admin.room-types.toggle', $roomType) }}">
+                <form method="POST" action="{{ route('admin.room-types.toggle', $roomType) }}" data-ajax-action>
                     @csrf
                     @method('PATCH')
                     <button type="submit"

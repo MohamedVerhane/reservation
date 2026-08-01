@@ -133,7 +133,7 @@
                                                         <button @click="showCancel = false" class="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 px-5 py-2.5 text-sm font-bold text-slate-700 dark:text-slate-200 transition-all duration-300 hover:bg-slate-50 dark:hover:bg-slate-800">
                                                             {{ __('auth.select') }}
                                                         </button>
-                                                        <form action="{{ route('customer.reservations.cancel', $reservation) }}" method="POST">
+                                                        <form action="{{ route('customer.reservations.cancel', $reservation) }}" method="POST" data-ajax-action data-success="{{ __('auth.cd_cancel_reservation') }}">
                                                             @csrf
                                                             <button type="submit" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-red-500 to-red-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-red-500/25 transition-all duration-300 hover:from-red-600 hover:to-red-700 hover:shadow-xl">
                                                                 <i class="bi bi-x-circle"></i>{{ __('auth.cd_cancel_reservation') }}

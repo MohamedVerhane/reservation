@@ -2,7 +2,7 @@
     <x-frontend.page-hero :title="__('search.title')" :subtitle="__('search.subtitle')" />
 
     <section class="max-w-7xl mx-auto px-6 py-10">
-        <form action="{{ route('frontend.search') }}" method="GET" class="mb-10 reveal">
+        <form action="{{ route('frontend.search') }}" method="GET" class="mb-10 reveal" data-ajax-filter="search-results">
             <div class="card p-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
                     <div class="form-label">
@@ -91,9 +91,6 @@
                                value="{{ request('amenities') }}">
                     </div>
                 </div>
-                <button type="submit" class="btn-primary">
-                    <i class="bi bi-search"></i> {{ __('search.search_button') }}
-                </button>
             </div>
         </form>
 

@@ -93,7 +93,7 @@
                 <h3 class="text-lg font-bold text-[var(--text-primary)] mb-1">{{ __('auth.cd_profile_tab') }}</h3>
                 <p class="text-sm text-[var(--text-muted)] mb-6">{{ __('auth.cd_settings') }}</p>
 
-                <form action="{{ route('customer.profile.update') }}" method="POST">
+                <form action="{{ route('customer.profile.update') }}" method="POST" data-ajax-action data-no-refresh data-success="{{ __('admin.profile.updated') }}">
                     @csrf
                     @method('PUT')
 
@@ -136,7 +136,7 @@
                 <h3 class="text-lg font-bold text-[var(--text-primary)] mb-1">{{ __('auth.cd_change_password') }}</h3>
                 <p class="text-sm text-[var(--text-muted)] mb-6">{{ __('auth.cd_password_requirements') }}</p>
 
-                <form action="{{ route('customer.profile.password') }}" method="POST">
+                <form action="{{ route('customer.profile.password') }}" method="POST" data-ajax-action data-no-refresh data-success="{{ __('auth.cd_password_updated') }}">
                     @csrf
                     @method('PUT')
 

@@ -98,7 +98,8 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('admin.users.index')
-            ->with('success', __('admin.user.deleted'));
+            ->with('success', __('admin.user.deleted'))
+            ->orJson();
     }
 
     public function restore($id): RedirectResponse
@@ -109,7 +110,8 @@ class UserController extends Controller
         $user->restore();
 
         return redirect()->route('admin.users.index')
-            ->with('success', __('admin.user.restored'));
+            ->with('success', __('admin.user.restored'))
+            ->orJson();
     }
 
     public function forceDelete($id): RedirectResponse
@@ -120,6 +122,7 @@ class UserController extends Controller
         $user->forceDelete();
 
         return redirect()->route('admin.users.index')
-            ->with('success', __('admin.user.permanently_deleted'));
+            ->with('success', __('admin.user.permanently_deleted'))
+            ->orJson();
     }
 }

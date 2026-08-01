@@ -59,11 +59,6 @@
 
             <input type="date" name="date_to" value="{{ request('date_to') }}" placeholder="{{ __('admin.filter.to_date') }}"
                 class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all" />
-
-            <button type="submit"
-                class="inline-flex items-center gap-2 rounded-xl bg-slate-900 dark:bg-slate-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors">
-                <i class="bi bi-funnel text-sm"></i> {{ __('admin.action.filter') }}
-            </button>
         </form>
     </div>
 
@@ -142,7 +137,7 @@
                                     </a>
 
                                     @if ($reservation->status === 'pending')
-                                        <form method="POST" action="{{ route('admin.reservations.confirm', $reservation) }}">
+                                        <form method="POST" action="{{ route('admin.reservations.confirm', $reservation) }}" data-ajax-action>
                                             @csrf
                                             <button type="submit" title="{{ __("admin.action.confirm") }}"
                                                 class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors">
@@ -152,7 +147,7 @@
                                     @endif
 
                                     @if ($reservation->status === 'confirmed' && $reservation->check_in->lessThanOrEqualTo(now()))
-                                        <form method="POST" action="{{ route('admin.reservations.check-in', $reservation) }}">
+                                        <form method="POST" action="{{ route('admin.reservations.check-in', $reservation) }}" data-ajax-action>
                                             @csrf
                                             <button type="submit" title="{{ __("admin.action.check_in") }}"
                                                 class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition-colors">
@@ -162,7 +157,7 @@
                                     @endif
 
                                     @if ($reservation->status === 'checked_in')
-                                        <form method="POST" action="{{ route('admin.reservations.check-out', $reservation) }}">
+                                        <form method="POST" action="{{ route('admin.reservations.check-out', $reservation) }}" data-ajax-action>
                                             @csrf
                                             <button type="submit" title="{{ __("admin.action.check_out") }}"
                                                 class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30 transition-colors">
@@ -173,7 +168,7 @@
 
                                     @if (in_array($reservation->status, ['pending', 'confirmed']) && $reservation->check_in->isFuture())
                                         <form method="POST" action="{{ route('admin.reservations.cancel', $reservation) }}"
-                                            x-data x-on:submit="return confirm('{{ __("admin.confirm.cancel_reservation") }}')">
+                                            x-data x-on:submit="return confirm('{{ __("admin.confirm.cancel_reservation") }}')" data-ajax-action>
                                             @csrf
                                             <button type="submit" title="{{ __("admin.action.cancel") }}"
                                                 class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors">
@@ -183,7 +178,7 @@
                                     @endif
 
                                     <form method="POST" action="{{ route('admin.reservations.destroy', $reservation) }}"
-                                        x-data x-on:submit="return confirm('{{ __("admin.confirm.permanent_delete") }}')">
+                                        x-data x-on:submit="return confirm('{{ __("admin.confirm.permanent_delete") }}')" data-ajax-action>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" title="{{ __("admin.action.delete") }}"

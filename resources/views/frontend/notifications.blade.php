@@ -4,9 +4,8 @@
     <section class="max-w-4xl mx-auto px-6 py-12">
         @if($notifications->count() > 0)
             <div class="flex justify-end mb-6">
-                <form action="{{ route('notifications.mark-all-read') }}" method="POST">
+                <form action="{{ route('notifications.mark-all-read') }}" method="POST" data-ajax-action data-success="{{ __('auth.notif_all_read') }}">
                     @csrf
-                    @method('PATCH')
                     <button type="submit" class="btn-ghost text-sm">
                         <i class="bi bi-check-all"></i> {{ __('notifications.mark_all_read') }}
                     </button>
@@ -30,9 +29,8 @@
                             </p>
                         </div>
                         @if(is_null($notification->read_at))
-                            <form action="{{ route('notifications.mark-read', $notification->id) }}" method="POST" class="shrink-0">
+                            <form action="{{ route('notifications.mark-read', $notification->id) }}" method="POST" data-ajax-action data-success="{{ __('auth.notif_mark_read') }}" class="shrink-0">
                                 @csrf
-                                @method('PATCH')
                                 <button type="submit" class="btn-ghost btn-sm text-xs">
                                     <i class="bi bi-check"></i>
                                 </button>

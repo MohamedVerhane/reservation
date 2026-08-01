@@ -91,7 +91,7 @@ class DashboardController extends Controller
 
         Auth::user()->update($validated);
 
-        return redirect()->back()->with('success', __('admin.profile.updated'));
+        return redirect()->back()->with('success', __('admin.profile.updated'))->orJson();
     }
 
     public function updatePassword(Request $request): RedirectResponse
@@ -105,7 +105,7 @@ class DashboardController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect()->back()->with('success', __('auth.cd_password_updated'));
+        return redirect()->back()->with('success', __('auth.cd_password_updated'))->orJson();
     }
 
     public function reviews(): View
@@ -207,7 +207,7 @@ class DashboardController extends Controller
         $reservation->load(['hotel:id,name,slug', 'room:id,room_number']);
         Auth::user()->notify(new BookingCancelled($reservation, __('admin.reservation.cancelled_by_guest')));
 
-        return redirect()->route('customer.reservations')->with('success', __('auth.cd_cancel_reservation'));
+        return redirect()->route('customer.reservations')->with('success', __('auth.cd_cancel_reservation'))->orJson();
     }
 
     public function destroyReview(Review $review): RedirectResponse
@@ -218,6 +218,6 @@ class DashboardController extends Controller
 
         $review->delete();
 
-        return redirect()->route('customer.reviews')->with('success', __('auth.cd_delete_review'));
+        return redirect()->route('customer.reviews')->with('success', __('auth.cd_delete_review'))->orJson();
     }
 }

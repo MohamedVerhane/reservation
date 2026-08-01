@@ -81,9 +81,6 @@
                     </div>
                 </div>
                 <div class="mt-4 flex items-center gap-3">
-                    <button type="submit" class="btn-gradient rounded-xl px-5 py-2.5 text-sm font-bold shadow-lg shadow-indigo-500/25">
-                        <i class="bi bi-funnel mr-1"></i> {{ __('admin.action.filter') }}
-                    </button>
                     <a href="{{ route('admin.users.index') }}" class="rounded-xl border border-slate-200 dark:border-slate-700 px-5 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800">
                         {{ __('admin.action.clear') }}
                     </a>
@@ -160,14 +157,14 @@
                                 <td class="px-4 py-3">
                                     <div class="flex items-center gap-2">
                                         @if ($user->trashed())
-                                            <form action="{{ route('admin.users.restore', $user->id) }}" method="POST">
+                                            <form action="{{ route('admin.users.restore', $user->id) }}" method="POST" data-ajax-action>
                                                 @csrf
                                                 @method('PATCH')
                                                 <button type="submit" class="inline-flex items-center justify-center rounded-lg border border-emerald-200 dark:border-emerald-800 p-1.5 text-emerald-600 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-900/20" :title="__('admin.action.restore')">
                                                     <i class="bi bi-arrow-counterclockwise text-sm"></i>
                                                 </button>
                                             </form>
-                                            <form action="{{ route('admin.users.force-delete', $user->id) }}" method="POST" onsubmit="return confirm('{{ __("admin.confirm.user_permanent_delete") }}')">
+                                            <form action="{{ route('admin.users.force-delete', $user->id) }}" method="POST" onsubmit="return confirm('{{ __("admin.confirm.user_permanent_delete") }}')" data-ajax-action>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="inline-flex items-center justify-center rounded-lg border border-red-200 dark:border-red-800 p-1.5 text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20" title="{{ __("admin.action.force_delete") }}">
@@ -181,7 +178,7 @@
                                             <a href="{{ route('admin.users.edit', $user) }}" class="inline-flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 p-1.5 text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800" title="{{ __("admin.action.edit") }}">
                                                 <i class="bi bi-pencil text-sm"></i>
                                             </a>
-                                            <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('{{ __("admin.confirm.delete") }}')">
+                                            <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('{{ __("admin.confirm.delete") }}')" data-ajax-action>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="inline-flex items-center justify-center rounded-lg border border-red-200 dark:border-red-800 p-1.5 text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20" title="{{ __("admin.action.delete") }}">

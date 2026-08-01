@@ -51,10 +51,6 @@
                 <option value="asc" {{ request('direction') === 'asc' ? 'selected' : '' }}>{{ __('admin.amenities.ascending') }}</option>
                 <option value="desc" {{ request('direction') === 'desc' ? 'selected' : '' }}>{{ __('admin.amenities.descending') }}</option>
             </select>
-            <button type="submit"
-                class="inline-flex items-center gap-2 rounded-xl bg-slate-900 dark:bg-slate-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors">
-                <i class="bi bi-funnel text-sm"></i> {{ __('admin.action.filter') }}
-            </button>
             @if (request()->hasAny(['search', 'status', 'sort', 'direction']))
                 <a href="{{ route('admin.amenities.index') }}"
                     class="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
@@ -125,7 +121,7 @@
                         </span>
                     @else
                         <form method="POST" action="{{ route('admin.amenities.destroy', $amenity) }}" class="flex-1"
-                            x-data x-on:submit="return confirm('{{ __("admin.confirm.delete") }}')">
+                            x-data x-on:submit="return confirm('{{ __("admin.confirm.delete") }}')" data-ajax-action>
                             @csrf
                             @method('DELETE')
                             <button type="submit"

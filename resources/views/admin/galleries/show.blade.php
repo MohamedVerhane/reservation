@@ -49,7 +49,7 @@
                         <i class="bi bi-pencil text-sm"></i> {{ __('admin.action.edit') }}
                     </a>
                     <form method="POST" action="{{ route('admin.galleries.destroy', $gallery) }}"
-                        x-data x-on:submit="return confirm('{{ __("admin.confirm.gallery_delete") }}')">
+                        x-data x-on:submit="return confirm('{{ __("admin.confirm.gallery_delete") }}')" data-ajax-action>
                         @csrf
                         @method('DELETE')
                         <button type="submit"
@@ -83,7 +83,7 @@
         <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-4">
             <i class="bi bi-cloud-arrow-up text-base me-1"></i> {{ __('admin.galleries.upload_images') }}
         </h3>
-        <form method="POST" action="{{ route('admin.galleries.images.upload', $gallery) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.galleries.images.upload', $gallery) }}" enctype="multipart/form-data" data-ajax-action data-success="{{ __('admin.gallery.images_uploaded') }}">
             @csrf
             <div class="flex flex-col sm:flex-row items-stretch sm:items-end gap-3">
                 <div class="flex-1">
@@ -119,7 +119,7 @@
                         {{-- Hover overlay --}}
                         <div class="absolute inset-0 bg-black/0 group-hover/img:bg-black/40 transition-colors flex items-center justify-center opacity-0 group-hover/img:opacity-100">
                             <form method="POST" action="{{ route('admin.galleries.images.delete', [$gallery, $image]) }}"
-                                x-data x-on:submit="return confirm('{{ __("admin.confirm.delete_image") }}')">
+                                x-data x-on:submit="return confirm('{{ __("admin.confirm.delete_image") }}')" data-ajax-action data-success="{{ __('admin.gallery.image_deleted') }}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" title="{{ __("admin.action.delete") }}"
