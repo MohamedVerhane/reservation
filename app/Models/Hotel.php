@@ -30,7 +30,6 @@ use Illuminate\Support\Str;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property \Carbon\Carbon|null $deleted_at
- *
  * @property-read User $user
  * @property-read \Illuminate\Database\Eloquent\Collection<RoomType> $roomTypes
  * @property-read \Illuminate\Database\Eloquent\Collection<Room> $rooms
@@ -40,6 +39,46 @@ use Illuminate\Support\Str;
  * @property-read string $full_address
  * @property-read float $average_rating
  * @property-read int $reviews_count
+ * @property-read int|null $galleries_count
+ * @property-read string|null $cover_image_url
+ * @property-read string $star_rating_label
+ * @property-read string $status_label
+ * @property-read int|null $reservations_count
+ * @property-read int|null $room_types_count
+ * @property-read int|null $rooms_count
+ * @method static Builder<static>|Hotel active()
+ * @method static Builder<static>|Hotel byCity(string $city)
+ * @method static Builder<static>|Hotel byCountry(string $country)
+ * @method static Builder<static>|Hotel byOwner(int $userId)
+ * @method static Builder<static>|Hotel byStarRating(int $rating)
+ * @method static \Database\Factories\HotelFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Hotel minStarRating(int $rating)
+ * @method static Builder<static>|Hotel newModelQuery()
+ * @method static Builder<static>|Hotel newQuery()
+ * @method static Builder<static>|Hotel onlyTrashed()
+ * @method static Builder<static>|Hotel query()
+ * @method static Builder<static>|Hotel search(string $term)
+ * @method static Builder<static>|Hotel whereAddress($value)
+ * @method static Builder<static>|Hotel whereCity($value)
+ * @method static Builder<static>|Hotel whereCountry($value)
+ * @method static Builder<static>|Hotel whereCoverImage($value)
+ * @method static Builder<static>|Hotel whereCreatedAt($value)
+ * @method static Builder<static>|Hotel whereDeletedAt($value)
+ * @method static Builder<static>|Hotel whereDescription($value)
+ * @method static Builder<static>|Hotel whereEmail($value)
+ * @method static Builder<static>|Hotel whereId($value)
+ * @method static Builder<static>|Hotel whereIsActive($value)
+ * @method static Builder<static>|Hotel whereLatitude($value)
+ * @method static Builder<static>|Hotel whereLongitude($value)
+ * @method static Builder<static>|Hotel whereName($value)
+ * @method static Builder<static>|Hotel wherePhone($value)
+ * @method static Builder<static>|Hotel whereSlug($value)
+ * @method static Builder<static>|Hotel whereStarRating($value)
+ * @method static Builder<static>|Hotel whereUpdatedAt($value)
+ * @method static Builder<static>|Hotel whereUserId($value)
+ * @method static Builder<static>|Hotel withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|Hotel withoutTrashed()
+ * @mixin \Eloquent
  */
 class Hotel extends Model
 {
@@ -161,7 +200,14 @@ class Hotel extends Model
 
     public function getCoverImageUrlAttribute(): ?string
     {
-        return $this->cover_image ? Storage::disk('public')->url($this->cover_image) : null;
+        if (!$this->cover_image) {
+            return null;
+        }
+
+        /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+        $disk = Storage::disk('public');
+
+        return $disk->url($this->cover_image);
     }
 
     // ─── Scopes ──────────────────────────────────────────
@@ -198,13 +244,13 @@ class Hotel extends Model
 
     public function scopeSearch(Builder $query, string $term): Builder
     {
-        $safeTerm = '%' . addslashes($term) . '%';
+        $term = '%' . $term . '%';
 
-        return $query->where(function (Builder $q) use ($safeTerm): void {
-            $q->where('name', 'LIKE', $safeTerm)
-              ->orWhere('city', 'LIKE', $safeTerm)
-              ->orWhere('country', 'LIKE', $safeTerm)
-              ->orWhere('address', 'LIKE', $safeTerm);
+        return $query->where(function (Builder $q) use ($term): void {
+            $q->where('name', 'LIKE', $term)
+              ->orWhere('city', 'LIKE', $term)
+              ->orWhere('country', 'LIKE', $term)
+              ->orWhere('address', 'LIKE', $term);
         });
     }
 
@@ -217,16 +263,15 @@ class Hotel extends Model
 
     public function isAvailableForDates(\Carbon\Carbon $checkIn, \Carbon\Carbon $checkOut, ?int $excludeReservationId = null): bool
     {
-        $query = $this->rooms()
-            ->availableForDates($checkIn, $checkOut);
-
-        if ($excludeReservationId) {
-            $query->whereDoesntHave('reservations', function ($q) use ($excludeReservationId): void {
-                $q->where('id', '!=', $excludeReservationId);
-            });
-        }
-
-        return $query->exists();
+        return $this->rooms()
+            ->available()
+            ->whereDoesntHave('reservations', function ($q) use ($checkIn, $checkOut, $excludeReservationId): void {
+                $q->whereNotIn('status', [Reservation::STATUS_CANCELLED])
+                  ->where('check_in', '<', $checkOut)
+                  ->where('check_out', '>', $checkIn)
+                  ->when($excludeReservationId, fn ($q2) => $q2->where('id', '!=', $excludeReservationId));
+            })
+            ->exists();
     }
 
     public function getAvailableRoomsCount(\Carbon\Carbon $checkIn, \Carbon\Carbon $checkOut): int

@@ -14,8 +14,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $user_id
  * @property int $hotel_id
  * @property int $room_id
- * @property string $check_in
- * @property string $check_out
+ * @property \Carbon\Carbon $check_in
+ * @property \Carbon\Carbon $check_out
  * @property int $guests
  * @property int $children_count
  * @property float $total_price
@@ -24,7 +24,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property \Carbon\Carbon|null $deleted_at
- *
  * @property-read User $user
  * @property-read Hotel $hotel
  * @property-read Room $room
@@ -35,6 +34,38 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read bool $is_upcoming
  * @property-read bool $is_past
  * @property-read bool $is_active
+ * @property-read float $balance
+ * @property-read float $total_paid
+ * @property-read int|null $payments_count
+ * @method static Builder<static>|Reservation active()
+ * @method static Builder<static>|Reservation byHotel(int $hotelId)
+ * @method static Builder<static>|Reservation byStatus(string $status)
+ * @method static Builder<static>|Reservation byUser(int $userId)
+ * @method static \Database\Factories\ReservationFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Reservation forDateRange(\Carbon\Carbon $start, \Carbon\Carbon $end)
+ * @method static Builder<static>|Reservation newModelQuery()
+ * @method static Builder<static>|Reservation newQuery()
+ * @method static Builder<static>|Reservation onlyTrashed()
+ * @method static Builder<static>|Reservation past()
+ * @method static Builder<static>|Reservation query()
+ * @method static Builder<static>|Reservation upcoming()
+ * @method static Builder<static>|Reservation whereCheckIn($value)
+ * @method static Builder<static>|Reservation whereCheckOut($value)
+ * @method static Builder<static>|Reservation whereChildrenCount($value)
+ * @method static Builder<static>|Reservation whereCreatedAt($value)
+ * @method static Builder<static>|Reservation whereDeletedAt($value)
+ * @method static Builder<static>|Reservation whereGuests($value)
+ * @method static Builder<static>|Reservation whereHotelId($value)
+ * @method static Builder<static>|Reservation whereId($value)
+ * @method static Builder<static>|Reservation whereNotes($value)
+ * @method static Builder<static>|Reservation whereRoomId($value)
+ * @method static Builder<static>|Reservation whereStatus($value)
+ * @method static Builder<static>|Reservation whereTotalPrice($value)
+ * @method static Builder<static>|Reservation whereUpdatedAt($value)
+ * @method static Builder<static>|Reservation whereUserId($value)
+ * @method static Builder<static>|Reservation withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|Reservation withoutTrashed()
+ * @mixin \Eloquent
  */
 class Reservation extends Model
 {
@@ -101,7 +132,7 @@ class Reservation extends Model
 
     public function getNightsAttribute(): int
     {
-        return $this->check_in->diffInDays($this->check_out);
+        return (int) $this->check_in->diffInDays($this->check_out);
     }
 
     public function getStatusLabelAttribute(): string
@@ -167,8 +198,10 @@ class Reservation extends Model
 
     public function scopePast(Builder $query): Builder
     {
-        return $query->where('check_out', '<', now())
-            ->orWhere('status', self::STATUS_CHECKED_OUT);
+        return $query->where(function (Builder $q): void {
+            $q->where('check_out', '<', now())
+              ->orWhere('status', self::STATUS_CHECKED_OUT);
+        });
     }
 
     public function scopeActive(Builder $query): Builder
@@ -219,9 +252,9 @@ class Reservation extends Model
         return $this->status === self::STATUS_CHECKED_IN;
     }
 
-    public function confirm(): void
+    public function confirm(): bool
     {
-        $this->update(['status' => self::STATUS_CONFIRMED]);
+        return $this->update(['status' => self::STATUS_CONFIRMED]);
     }
 
     public function checkIn(): void

@@ -8,7 +8,10 @@ trait HasMedia
 {
     public function getUrlAttribute(): string
     {
-        return Storage::disk('public')->url($this->path);
+        /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+        $disk = Storage::disk('public');
+
+        return $disk->url($this->path);
     }
 
     public function scopeOrdered(\Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder

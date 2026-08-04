@@ -23,10 +23,58 @@ use Spatie\Permission\Traits\HasRoles;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property \Carbon\Carbon|null $deleted_at
- *
  * @property-read \Illuminate\Database\Eloquent\Collection<Hotel> $hotels
  * @property-read \Illuminate\Database\Eloquent\Collection<Reservation> $reservations
  * @property-read \Illuminate\Database\Eloquent\Collection<Review> $reviews
+ * @property string|null $remember_token
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Favorite> $favorites
+ * @property-read int|null $favorites_count
+ * @property-read int|null $hotels_count
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
+ * @property-read int|null $permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Reservation> $recentReservations
+ * @property-read int|null $recent_reservations_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Review> $recentReviews
+ * @property-read int|null $recent_reviews_count
+ * @property-read int|null $reservations_count
+ * @property-read int|null $reviews_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
+ * @property-read int|null $roles_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $teams
+ * @property-read int|null $teams_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
+ * @property-read int|null $tokens_count
+ * @method static Builder<static>|User admins()
+ * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
+ * @method static Builder<static>|User guests()
+ * @method static Builder<static>|User newModelQuery()
+ * @method static Builder<static>|User newQuery()
+ * @method static Builder<static>|User onlyTrashed()
+ * @method static Builder<static>|User owners()
+ * @method static Builder<static>|User permission($permissions, bool $without = false)
+ * @method static Builder<static>|User query()
+ * @method static Builder<static>|User role(string $role)
+ * @method static Builder<static>|User team($teams, bool $without = false)
+ * @method static Builder<static>|User verified()
+ * @method static Builder<static>|User whereCreatedAt($value)
+ * @method static Builder<static>|User whereDeletedAt($value)
+ * @method static Builder<static>|User whereEmail($value)
+ * @method static Builder<static>|User whereEmailVerifiedAt($value)
+ * @method static Builder<static>|User whereId($value)
+ * @method static Builder<static>|User whereName($value)
+ * @method static Builder<static>|User wherePassword($value)
+ * @method static Builder<static>|User wherePhone($value)
+ * @method static Builder<static>|User whereRememberToken($value)
+ * @method static Builder<static>|User whereRole($value)
+ * @method static Builder<static>|User whereUpdatedAt($value)
+ * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|User withoutPermission($permissions)
+ * @method static Builder<static>|User withoutRole($roles, ?string $guard = null)
+ * @method static Builder<static>|User withoutTeam($teams)
+ * @method static Builder<static>|User withoutTrashed()
+ * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
 {

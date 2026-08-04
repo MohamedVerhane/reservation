@@ -18,10 +18,23 @@ use Illuminate\Support\Facades\Storage;
  * @property int $sort_order
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- *
  * @property-read Gallery $gallery
  * @property-read string $url
  * @property-read string $full_url
+ * @method static Builder<static>|Image byGallery(int $galleryId)
+ * @method static Builder<static>|Image newModelQuery()
+ * @method static Builder<static>|Image newQuery()
+ * @method static Builder<static>|Image ordered()
+ * @method static Builder<static>|Image query()
+ * @method static Builder<static>|Image whereAltText($value)
+ * @method static Builder<static>|Image whereCaption($value)
+ * @method static Builder<static>|Image whereCreatedAt($value)
+ * @method static Builder<static>|Image whereGalleryId($value)
+ * @method static Builder<static>|Image whereId($value)
+ * @method static Builder<static>|Image wherePath($value)
+ * @method static Builder<static>|Image whereSortOrder($value)
+ * @method static Builder<static>|Image whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Image extends Model
 {
@@ -51,7 +64,10 @@ class Image extends Model
 
     public function getFullUrlAttribute(): string
     {
-        return Storage::disk('public')->url($this->path);
+        /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+        $disk = Storage::disk('public');
+
+        return $disk->url($this->path);
     }
 
     // ─── Scopes ──────────────────────────────────────────

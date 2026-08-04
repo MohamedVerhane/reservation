@@ -6,7 +6,6 @@ use App\Payment\DTOs\ChargeRequest;
 use App\Payment\DTOs\ChargeResponse;
 use App\Payment\DTOs\RefundRequest;
 use App\Payment\DTOs\RefundResponse;
-use App\Payment\Exceptions\PaymentException;
 
 class FlutterwaveGateway extends AbstractGateway
 {

@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
                 session()->forget('errors');
 
                 return response()->json([
-                    'message' => __('The given data was invalid.'),
+                    'message' => 'The given data was invalid.',
                     'errors' => $errors->getMessages(),
                 ], 422);
             }

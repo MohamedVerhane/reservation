@@ -13,14 +13,27 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $hotel_id
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- *
  * @property-read User $user
  * @property-read Hotel $hotel
+ * @method static Builder<static>|Favorite byHotel(int $hotelId)
+ * @method static Builder<static>|Favorite byUser(int $userId)
+ * @method static \Database\Factories\FavoriteFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Favorite newModelQuery()
+ * @method static Builder<static>|Favorite newQuery()
+ * @method static Builder<static>|Favorite query()
+ * @method static Builder<static>|Favorite whereCreatedAt($value)
+ * @method static Builder<static>|Favorite whereHotelId($value)
+ * @method static Builder<static>|Favorite whereId($value)
+ * @method static Builder<static>|Favorite whereUpdatedAt($value)
+ * @method static Builder<static>|Favorite whereUserId($value)
+ * @mixin \Eloquent
  */
 class Favorite extends Model
 {
+    /** @use HasFactory<\Database\Factories\FavoriteFactory> */
     use HasFactory;
 
+    /** @var list<string> */
     protected $fillable = [
         'user_id',
         'hotel_id',
@@ -28,11 +41,13 @@ class Favorite extends Model
 
     // ─── Relationships ───────────────────────────────────
 
+    /** @return BelongsTo<User, Favorite> */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /** @return BelongsTo<Hotel, Favorite> */
     public function hotel(): BelongsTo
     {
         return $this->belongsTo(Hotel::class);
@@ -54,19 +69,22 @@ class Favorite extends Model
 
     public static function isFavorited(int $userId, int $hotelId): bool
     {
-        return static::where('user_id', $userId)->where('hotel_id', $hotelId)->exists();
+        return static::query()->where('user_id', $userId)->where('hotel_id', $hotelId)->exists();
     }
 
     public static function toggle(int $userId, int $hotelId): bool
     {
-        $existing = static::where('user_id', $userId)->where('hotel_id', $hotelId)->first();
+        $deleted = static::query()
+            ->where('user_id', $userId)
+            ->where('hotel_id', $hotelId)
+            ->delete();
 
-        if ($existing) {
-            $existing->delete();
+        if ($deleted > 0) {
             return false;
         }
 
-        static::create(['user_id' => $userId, 'hotel_id' => $hotelId]);
+        static::query()->create(['user_id' => $userId, 'hotel_id' => $hotelId]);
+
         return true;
     }
 }

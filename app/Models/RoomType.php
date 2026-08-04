@@ -19,11 +19,33 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property bool $is_active
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- *
  * @property-read Hotel $hotel
  * @property-read \Illuminate\Database\Eloquent\Collection<Room> $rooms
  * @property-read int $active_rooms_count
  * @property-read string $price_formatted
+ * @property-read int $available_rooms_count
+ * @property-read string $status_label
+ * @property-read int|null $rooms_count
+ * @method static Builder<static>|RoomType active()
+ * @method static Builder<static>|RoomType byHotel(int $hotelId)
+ * @method static Builder<static>|RoomType byPriceRange(float $min, float $max)
+ * @method static \Database\Factories\RoomTypeFactory factory($count = null, $state = [])
+ * @method static Builder<static>|RoomType maxPrice(float $price)
+ * @method static Builder<static>|RoomType minGuests(int $guests)
+ * @method static Builder<static>|RoomType newModelQuery()
+ * @method static Builder<static>|RoomType newQuery()
+ * @method static Builder<static>|RoomType query()
+ * @method static Builder<static>|RoomType whereBasePrice($value)
+ * @method static Builder<static>|RoomType whereCreatedAt($value)
+ * @method static Builder<static>|RoomType whereDescription($value)
+ * @method static Builder<static>|RoomType whereHotelId($value)
+ * @method static Builder<static>|RoomType whereId($value)
+ * @method static Builder<static>|RoomType whereIsActive($value)
+ * @method static Builder<static>|RoomType whereMaxChildren($value)
+ * @method static Builder<static>|RoomType whereMaxGuests($value)
+ * @method static Builder<static>|RoomType whereName($value)
+ * @method static Builder<static>|RoomType whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class RoomType extends Model
 {

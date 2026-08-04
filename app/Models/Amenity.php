@@ -14,11 +14,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property bool $is_active
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- *
  * @property-read \Illuminate\Database\Eloquent\Collection<Room> $rooms
  * @property-read int $rooms_count
  * @property-read string $status_label
  * @property-read string $status_color
+ * @property-read string $icon_html
+ * @method static Builder<static>|Amenity active()
+ * @method static Builder<static>|Amenity alphabetical()
+ * @method static \Database\Factories\AmenityFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Amenity newModelQuery()
+ * @method static Builder<static>|Amenity newQuery()
+ * @method static Builder<static>|Amenity query()
+ * @method static Builder<static>|Amenity search(string $term)
+ * @method static Builder<static>|Amenity whereCreatedAt($value)
+ * @method static Builder<static>|Amenity whereIcon($value)
+ * @method static Builder<static>|Amenity whereId($value)
+ * @method static Builder<static>|Amenity whereIsActive($value)
+ * @method static Builder<static>|Amenity whereName($value)
+ * @method static Builder<static>|Amenity whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Amenity extends Model
 {
@@ -78,13 +92,13 @@ class Amenity extends Model
 
     public function scopeSearch(Builder $query, string $term): Builder
     {
-        return $query->where('name', 'LIKE', '%' . addslashes($term) . '%');
+        return $query->where('name', 'LIKE', '%' . $term . '%');
     }
 
     // ─── Helpers ─────────────────────────────────────────
 
-    public function toggleStatus(): void
+    public function toggleStatus(): bool
     {
-        $this->update(['is_active' => !$this->is_active]);
+        return $this->update(['is_active' => !$this->is_active]);
     }
 }

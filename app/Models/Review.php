@@ -17,15 +17,45 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $comment
  * @property string|null $reply
  * @property \Carbon\Carbon|null $replied_at
+ * @property bool $is_approved
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property \Carbon\Carbon|null $deleted_at
- *
  * @property-read User $user
  * @property-read Hotel $hotel
  * @property-read Reservation|null $reservation
  * @property-read bool $has_reply
  * @property-read string $star_display
+ * @method static Builder<static>|Review approved()
+ * @method static Builder<static>|Review byHotel(int $hotelId)
+ * @method static Builder<static>|Review byRating(int $rating)
+ * @method static Builder<static>|Review byUser(int $userId)
+ * @method static \Database\Factories\ReviewFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Review minRating(int $rating)
+ * @method static Builder<static>|Review newModelQuery()
+ * @method static Builder<static>|Review newQuery()
+ * @method static Builder<static>|Review onlyTrashed()
+ * @method static Builder<static>|Review ordered()
+ * @method static Builder<static>|Review pending()
+ * @method static Builder<static>|Review query()
+ * @method static Builder<static>|Review recent(int $days = 30)
+ * @method static Builder<static>|Review whereComment($value)
+ * @method static Builder<static>|Review whereCreatedAt($value)
+ * @method static Builder<static>|Review whereDeletedAt($value)
+ * @method static Builder<static>|Review whereHotelId($value)
+ * @method static Builder<static>|Review whereId($value)
+ * @method static Builder<static>|Review whereIsApproved($value)
+ * @method static Builder<static>|Review whereRating($value)
+ * @method static Builder<static>|Review whereRepliedAt($value)
+ * @method static Builder<static>|Review whereReply($value)
+ * @method static Builder<static>|Review whereReservationId($value)
+ * @method static Builder<static>|Review whereUpdatedAt($value)
+ * @method static Builder<static>|Review whereUserId($value)
+ * @method static Builder<static>|Review withReplies()
+ * @method static Builder<static>|Review withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|Review withoutReplies()
+ * @method static Builder<static>|Review withoutTrashed()
+ * @mixin \Eloquent
  */
 class Review extends Model
 {
@@ -141,14 +171,14 @@ class Review extends Model
 
     // ─── Helpers ─────────────────────────────────────────
 
-    public function approve(): void
+    public function approve(): bool
     {
-        $this->update(['is_approved' => true]);
+        return $this->update(['is_approved' => true]);
     }
 
-    public function reject(): void
+    public function reject(): bool
     {
-        $this->update(['is_approved' => false]);
+        return $this->update(['is_approved' => false]);
     }
 
     public function isApproved(): bool
@@ -161,9 +191,9 @@ class Review extends Model
         return ! $this->is_approved;
     }
 
-    public function addReply(string $reply): void
+    public function addReply(string $reply): bool
     {
-        $this->update([
+        return $this->update([
             'reply' => $reply,
             'replied_at' => now(),
         ]);

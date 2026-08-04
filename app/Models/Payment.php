@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Carbon\Carbon|null $paid_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- *
  * @property-read Reservation $reservation
  * @property-read bool $is_completed
  * @property-read bool $is_pending
@@ -25,6 +24,26 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read bool $is_refunded
  * @property-read string $status_label
  * @property-read string $status_color
+ * @property-read string $method_label
+ * @method static Builder<static>|Payment byMethod(string $method)
+ * @method static Builder<static>|Payment byReservation(int $reservationId)
+ * @method static Builder<static>|Payment completed()
+ * @method static \Database\Factories\PaymentFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Payment failed()
+ * @method static Builder<static>|Payment newModelQuery()
+ * @method static Builder<static>|Payment newQuery()
+ * @method static Builder<static>|Payment pending()
+ * @method static Builder<static>|Payment query()
+ * @method static Builder<static>|Payment whereAmount($value)
+ * @method static Builder<static>|Payment whereCreatedAt($value)
+ * @method static Builder<static>|Payment whereId($value)
+ * @method static Builder<static>|Payment whereMethod($value)
+ * @method static Builder<static>|Payment wherePaidAt($value)
+ * @method static Builder<static>|Payment whereReservationId($value)
+ * @method static Builder<static>|Payment whereStatus($value)
+ * @method static Builder<static>|Payment whereTransactionId($value)
+ * @method static Builder<static>|Payment whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Payment extends Model
 {
@@ -152,22 +171,22 @@ class Payment extends Model
 
     // ─── Helpers ─────────────────────────────────────────
 
-    public function markAsCompleted(?string $transactionId = null): void
+    public function markAsCompleted(?string $transactionId = null): bool
     {
-        $this->update([
+        return $this->update([
             'status' => self::STATUS_COMPLETED,
             'paid_at' => now(),
             'transaction_id' => $transactionId,
         ]);
     }
 
-    public function markAsFailed(): void
+    public function markAsFailed(): bool
     {
-        $this->update(['status' => self::STATUS_FAILED]);
+        return $this->update(['status' => self::STATUS_FAILED]);
     }
 
-    public function markAsRefunded(): void
+    public function markAsRefunded(): bool
     {
-        $this->update(['status' => self::STATUS_REFUNDED]);
+        return $this->update(['status' => self::STATUS_REFUNDED]);
     }
 }

@@ -17,9 +17,23 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property bool $is_primary
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- *
  * @property-read Room $room
  * @property-read string $url
+ * @method static Builder<static>|RoomImage newModelQuery()
+ * @method static Builder<static>|RoomImage newQuery()
+ * @method static Builder<static>|RoomImage ordered()
+ * @method static Builder<static>|RoomImage primary()
+ * @method static Builder<static>|RoomImage query()
+ * @method static Builder<static>|RoomImage whereAltText($value)
+ * @method static Builder<static>|RoomImage whereCaption($value)
+ * @method static Builder<static>|RoomImage whereCreatedAt($value)
+ * @method static Builder<static>|RoomImage whereId($value)
+ * @method static Builder<static>|RoomImage whereIsPrimary($value)
+ * @method static Builder<static>|RoomImage wherePath($value)
+ * @method static Builder<static>|RoomImage whereRoomId($value)
+ * @method static Builder<static>|RoomImage whereSortOrder($value)
+ * @method static Builder<static>|RoomImage whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class RoomImage extends Model
 {

@@ -4,7 +4,7 @@ namespace App\Traits;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Resources\ResourceCollection;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 trait ApiResponse
 {

@@ -3,7 +3,6 @@
 namespace App\Payment\Services;
 
 use App\Models\Payment;
-use App\Models\Reservation;
 use App\Payment\Contracts\PaymentGatewayInterface;
 use App\Payment\Contracts\PaymentServiceInterface;
 use App\Payment\DTOs\ChargeRequest;
@@ -17,7 +16,6 @@ use App\Payment\Gateways\StripeGateway;
 use App\Payment\Gateways\PayPalGateway;
 use App\Payment\Gateways\FlutterwaveGateway;
 use App\Payment\Gateways\MollieGateway;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class PaymentService implements PaymentServiceInterface
@@ -33,15 +31,15 @@ class PaymentService implements PaymentServiceInterface
     protected function registerGateways(array $config): void
     {
         $gatewayClasses = [
-            PaymentProvider::Stripe      => StripeGateway::class,
-            PaymentProvider::PayPal      => PayPalGateway::class,
-            PaymentProvider::Flutterwave => FlutterwaveGateway::class,
-            PaymentProvider::Mollie      => MollieGateway::class,
+            PaymentProvider::Stripe->value      => StripeGateway::class,
+            PaymentProvider::PayPal->value      => PayPalGateway::class,
+            PaymentProvider::Flutterwave->value => FlutterwaveGateway::class,
+            PaymentProvider::Mollie->value      => MollieGateway::class,
         ];
 
-        foreach ($gatewayClasses as $provider => $class) {
-            $gatewayConfig = $config['gateways'][$provider->value] ?? [];
-            $this->gateways[$provider->value] = new $class($gatewayConfig);
+        foreach ($gatewayClasses as $providerValue => $class) {
+            $gatewayConfig = $config['gateways'][$providerValue] ?? [];
+            $this->gateways[$providerValue] = new $class($gatewayConfig);
         }
     }
 
@@ -93,7 +91,7 @@ class PaymentService implements PaymentServiceInterface
             throw PaymentException::gatewayUnavailable($gateway->getDisplayName());
         }
 
-        $payment = Payment::where('transaction_id', $request->transactionId)->first();
+        $payment = Payment::query()->where('transaction_id', $request->transactionId)->first();
 
         if (! $payment) {
             throw new PaymentException(
@@ -181,7 +179,7 @@ class PaymentService implements PaymentServiceInterface
     protected function recordCharge(ChargeRequest $request, ChargeResponse $response, PaymentProvider $provider): void
     {
         if ($request->paymentId) {
-            $payment = Payment::find($request->paymentId);
+            $payment = Payment::query()->find($request->paymentId);
             if ($payment) {
                 $status = $this->mapStatus($response->status);
                 $payment->update([
@@ -195,7 +193,7 @@ class PaymentService implements PaymentServiceInterface
         }
 
         if ($request->reservationId) {
-            Payment::create([
+            Payment::query()->create([
                 'reservation_id' => $request->reservationId,
                 'amount' => $request->amount,
                 'method' => $provider->value,
@@ -209,7 +207,7 @@ class PaymentService implements PaymentServiceInterface
     protected function recordFailedCharge(ChargeRequest $request, PaymentException $e, PaymentProvider $provider): void
     {
         if ($request->paymentId) {
-            $payment = Payment::find($request->paymentId);
+            $payment = Payment::query()->find($request->paymentId);
             if ($payment) {
                 $payment->markAsFailed();
                 return;
@@ -217,7 +215,7 @@ class PaymentService implements PaymentServiceInterface
         }
 
         if ($request->reservationId) {
-            Payment::create([
+            Payment::query()->create([
                 'reservation_id' => $request->reservationId,
                 'amount' => $request->amount,
                 'method' => $provider->value,

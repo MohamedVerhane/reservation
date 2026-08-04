@@ -19,7 +19,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property bool $is_active
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- *
  * @property-read Hotel $hotel
  * @property-read RoomType $roomType
  * @property-read \Illuminate\Database\Eloquent\Collection<Amenity> $amenities
@@ -27,6 +26,31 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \Illuminate\Database\Eloquent\Collection<Reservation> $reservations
  * @property-read string $status_label
  * @property-read string $status_color
+ * @property-read int|null $amenities_count
+ * @property-read string $display_name
+ * @property-read int|null $images_count
+ * @property-read int|null $reservations_count
+ * @method static Builder<static>|Room active()
+ * @method static Builder<static>|Room available()
+ * @method static Builder<static>|Room availableForDates(\Carbon\Carbon $checkIn, \Carbon\Carbon $checkOut)
+ * @method static Builder<static>|Room byFloor(int $floor)
+ * @method static Builder<static>|Room byHotel(int $hotelId)
+ * @method static Builder<static>|Room byStatus(string $status)
+ * @method static Builder<static>|Room byType(int $roomTypeId)
+ * @method static \Database\Factories\RoomFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Room newModelQuery()
+ * @method static Builder<static>|Room newQuery()
+ * @method static Builder<static>|Room query()
+ * @method static Builder<static>|Room whereCreatedAt($value)
+ * @method static Builder<static>|Room whereFloor($value)
+ * @method static Builder<static>|Room whereHotelId($value)
+ * @method static Builder<static>|Room whereId($value)
+ * @method static Builder<static>|Room whereIsActive($value)
+ * @method static Builder<static>|Room whereRoomNumber($value)
+ * @method static Builder<static>|Room whereRoomTypeId($value)
+ * @method static Builder<static>|Room whereStatus($value)
+ * @method static Builder<static>|Room whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Room extends Model
 {

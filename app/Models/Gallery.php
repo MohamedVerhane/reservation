@@ -16,10 +16,24 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $sort_order
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- *
  * @property-read Hotel $hotel
  * @property-read \Illuminate\Database\Eloquent\Collection<Image> $images
  * @property-read int $images_count
+ * @property-read \App\Models\Image|null $cover_image
+ * @method static Builder<static>|Gallery byHotel(int $hotelId)
+ * @method static \Database\Factories\GalleryFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Gallery newModelQuery()
+ * @method static Builder<static>|Gallery newQuery()
+ * @method static Builder<static>|Gallery ordered()
+ * @method static Builder<static>|Gallery query()
+ * @method static Builder<static>|Gallery whereCreatedAt($value)
+ * @method static Builder<static>|Gallery whereDescription($value)
+ * @method static Builder<static>|Gallery whereHotelId($value)
+ * @method static Builder<static>|Gallery whereId($value)
+ * @method static Builder<static>|Gallery whereSortOrder($value)
+ * @method static Builder<static>|Gallery whereTitle($value)
+ * @method static Builder<static>|Gallery whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Gallery extends Model
 {
