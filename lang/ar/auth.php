@@ -10,6 +10,7 @@ return [
 
     // Frontend Navigation
     'nav_home' => 'الرئيسية', 'nav_hotels' => 'الفنادق', 'nav_about' => 'من نحن', 'nav_contact' => 'اتصل بنا', 'nav_gallery' => 'المعرض', 'nav_book_now' => 'احجز الآن', 'nav_admin' => 'لوحة التحكم',
+    'menu' => 'القائمة', 'close' => 'إغلاق',
 
     // Home Page
     'home_hero_title' => 'اختبر الفخامة', 'home_hero_subtitle' => 'اكتشف أفخم الفنادق والمنتجعات في العالم. انغمس في راحة لا مثيل لها ورقي فائق.', 'home_hero_cta' => 'استكشف الفنادق', 'home_hero_cta2' => 'جولة سريعة',
@@ -18,6 +19,12 @@ return [
     'home_stats_hotels' => 'فنادق فاخرة', 'home_stats_rooms' => 'غرف مميزة', 'home_stats_guests' => 'ضيوف سعداء', 'home_stats_awards' => 'جوائز حاصل عليها',
     'home_cta_title' => 'مستعد لإقامة لا تُنسى؟', 'home_cta_text' => 'احجز عطلتك الحلم اليوم واختبر قمة الضيافة الفاخرة.', 'home_cta_button' => 'ابدأ الحجز',
     'home_view_all' => 'عرض الكل', 'home_view_details' => 'عرض التفاصيل', 'home_per_night' => '/ ليلة', 'home_from' => 'يبدأ من', 'home_reviews' => 'تقييمات', 'home_night' => 'ليلة', 'view_details' => 'عرض التفاصيل',
+    'home_features_title' => 'لماذا لوكس ستاي', 'home_features_subtitle' => 'كل إقامة مُنسّقة بعناية لتتجاوز التوقعات.',
+    'home_feature_price' => 'ضمان أفضل سعر', 'home_feature_price_text' => 'وجدت سعراً أقل في مكان آخر؟ نطابق السعر ونكافئ ولاءك.',
+    'home_feature_concierge' => 'خدمة كونسيرج 24/7', 'home_feature_concierge_text' => 'مساعدة على مدار الساعة من تسجيل الوصول حتى المغادرة، وبأي لغة.',
+    'home_feature_clean' => 'تعقيم فاخر', 'home_feature_clean_text' => 'معايير نظافة بمستوى المستشفيات في كل غرفة، وفي كل مرة.',
+    'home_feature_award' => 'إقامات حائزة على جوائز', 'home_feature_award_text' => 'معترف بها عالمياً لضيافة استثنائية واهتمام بالتفاصيل.',
+    'home_trust_label' => 'موثوق من أكثر من 120,000 مسافر في 40 دولة',
 
     // Hotels Page
     'hotels_title' => 'فنادقنا', 'hotels_subtitle' => 'استكشف مجموعتنا من الفنادق والمنتجعات العالمية',
@@ -78,7 +85,7 @@ return [
     'footer_quick_links' => 'روابط سريعة', 'footer_contact' => 'اتصل بنا', 'footer_newsletter' => 'النشرة الإخبارية', 'footer_newsletter_text' => 'اشترك للحصول على عروض حصرية وتحديثات.', 'footer_subscribe' => 'اشترك', 'footer_email_placeholder' => 'أدخل بريدك الإلكتروني',     'footer_rights' => 'جميع الحقوق محفوظة.', 'footer_privacy' => 'سياسة الخصوصية', 'footer_terms' => 'شروط الخدمة',
 
     // Shared
-    'luxury' => 'فاخر', 'reviews' => 'تقييمات', 'rooms' => 'غرف', 'amenities' => 'مرافق', 'night' => 'ليلة', 'nights' => 'ليالٍ',
+    'luxury' => 'فاخر', 'reviews' => 'تقييمات', 'rooms' => 'غرف', 'amenities' => 'مرافق', 'night' => 'ليلة', 'nights' => 'ليالٍ', 'star' => 'نجمة',
     'max' => 'حتى', 'guests' => 'ضيوف', 'children' => 'أطفال', 'total' => 'المجموع', 'select' => 'اختر', 'edit' => 'تعديل',
     'hotel' => 'الفندق', 'room' => 'الغرفة', 'room_number' => 'رقم الغرفة', 'floor' => 'الطابق', 'check_in' => ' الوصول', 'check_out' => 'المغادرة',
     'adults' => 'البالغون', 'status' => 'الحالة', 'payment_method' => 'طريقة الدفع',

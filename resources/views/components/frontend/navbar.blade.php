@@ -1,19 +1,17 @@
 @php $locale = app()->getLocale(); @endphp
 
-<nav x-data="{ open: false }" class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--border-light)] bg-[var(--surface)]/80 backdrop-blur-xl">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex h-16 items-center justify-between lg:h-[4.25rem]">
+<nav x-data="{ open: false }" class="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between gap-4">
 
             {{-- Logo --}}
-            <a href="{{ route('home') }}" class="flex items-center gap-2.5 shrink-0">
-                <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--gold)] text-white text-sm font-bold">
-                    <i class="bi bi-gem"></i>
-                </span>
-                <span class="text-lg font-extrabold tracking-tight text-[var(--text-primary)]">{{ __('auth.app_name') }}</span>
+            <a href="{{ route('home') }}" class="flex shrink-0 items-center gap-2.5">
+                <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/80 font-serif text-sm font-black leading-none text-white shadow-sm shadow-primary/25">MD</span>
+                <span class="text-lg font-extrabold tracking-tight text-foreground">{{ __('auth.app_name') }}</span>
             </a>
 
             {{-- Desktop nav --}}
-            <div class="hidden md:flex items-center gap-1">
+            <div class="hidden items-center gap-1 lg:flex">
                 @foreach([
                     ['route' => 'home', 'name' => __('auth.home'), 'check' => 'home'],
                     ['route' => 'frontend.search', 'name' => __('auth.nav_hotels'), 'check' => 'frontend.search*|frontend.hotels*'],
@@ -22,137 +20,162 @@
                     ['route' => 'frontend.contact', 'name' => __('auth.contact'), 'check' => 'frontend.contact*'],
                 ] as $item)
                     <a href="{{ route($item['route']) }}"
-                       class="px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200
-                       {{ request()->routeIs($item['check']) ? 'bg-[var(--gold)]/8 text-[var(--gold)] font-semibold' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-alt)]' }}">
+                       class="rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-200
+                       {{ request()->routeIs($item['check']) ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-muted hover:text-foreground' }}">
                         {{ $item['name'] }}
                     </a>
                 @endforeach
             </div>
 
-            {{-- Desktop right side (hidden on mobile) --}}
-            <div class="hidden md:flex items-center gap-2">
-                <x-language-switcher class="inline-flex items-center px-2.5 py-1 text-xs font-semibold rounded-md border border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-all duration-200" />
+            {{-- Desktop right side --}}
+            <div class="hidden items-center gap-2 lg:flex">
+                <x-language-switcher class="inline-flex items-center rounded-md px-2.5 py-1.5 text-xs font-semibold border border-border text-muted-foreground hover:border-primary hover:text-primary transition-all duration-200" />
 
-                <x-theme-toggle class="btn-icon btn-ghost text-[var(--text-muted)] hover:text-[var(--gold)]" />
+                <x-theme-toggle class="btn-icon btn-ghost text-muted-foreground hover:text-primary" />
 
                 @auth
                     @if(auth()->user()->isAdmin() || auth()->user()->isOwner())
-                        <a href="{{ route('admin.dashboard') }}" class="inline-flex btn-ghost btn-sm text-[var(--text-muted)]">
-                            <i class="bi bi-grid-1x2"></i> {{ __('auth.dashboard') }}
+                        <a href="{{ route('admin.dashboard') }}" class="inline-flex btn-ghost btn-sm text-muted-foreground">
+                            <i data-lucide="layout-grid" class="h-4 w-4"></i> {{ __('auth.dashboard') }}
                         </a>
                     @endif
-                    <a href="{{ route('frontend.booking.my-reservations') }}" class="inline-flex btn-ghost btn-sm text-[var(--text-muted)]">
-                        <i class="bi bi-bookmark"></i> {{ __('auth.booking_my_reservations') }}
+                    <a href="{{ route('frontend.booking.my-reservations') }}" class="inline-flex btn-ghost btn-sm text-muted-foreground">
+                        <i data-lucide="bookmark" class="h-4 w-4"></i> {{ __('auth.booking_my_reservations') }}
                     </a>
 
-                    <x-notifications-dropdown viewAllRoute="customer.notifications" class="p-2 btn-ghost text-[var(--text-muted)]" />
+                    <x-notifications-dropdown viewAllRoute="customer.notifications" class="btn-ghost text-muted-foreground" />
 
                     {{-- User menu --}}
                     <div class="relative" x-data="{ show: false }" @click.outside="show = false">
-                        <button @click="show = !show" class="flex items-center gap-2 rounded-full p-1 pr-2 hover:bg-[var(--surface-alt)] transition-colors">
+                        <button @click="show = !show" class="flex items-center gap-2 rounded-full p-1 pe-2 hover:bg-muted transition-colors">
                             <span class="avatar avatar-sm">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
-                            <span class="hidden lg:inline text-sm font-medium text-[var(--text-primary)]">{{ auth()->user()->name }}</span>
-                            <i class="bi bi-chevron-down text-xs text-[var(--text-muted)] transition-transform" :class="show && 'rotate-180'"></i>
+                            <span class="hidden xl:inline text-sm font-medium text-foreground">{{ auth()->user()->name }}</span>
+                            <i data-lucide="chevron-down" class="h-3.5 w-3.5 text-muted-foreground transition-transform" :class="show && 'rotate-180'"></i>
                         </button>
 
                         <div x-show="show" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                              x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
-                             class="absolute {{ $locale === 'ar' ? 'left-0' : 'right-0' }} mt-2 w-56 rounded-xl border border-[var(--border)] bg-[var(--surface-elevated)] shadow-xl py-1 z-50">
-                            <div class="px-4 py-3 border-b border-[var(--border-light)]">
-                                <p class="text-sm font-semibold text-[var(--text-primary)]">{{ auth()->user()->name }}</p>
-                                <p class="text-xs text-[var(--text-muted)]">{{ auth()->user()->email }}</p>
+                             class="absolute {{ $locale === 'ar' ? 'start-0' : 'end-0' }} mt-2 w-56 rounded-xl border border-border bg-card shadow-xl py-1 z-50">
+                            <div class="border-b border-border px-4 py-3">
+                                <p class="text-sm font-semibold text-foreground">{{ auth()->user()->name }}</p>
+                                <p class="text-xs text-muted-foreground">{{ auth()->user()->email }}</p>
                             </div>
-                            <a href="{{ url('/profile') }}" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-[var(--text-secondary)] hover:bg-[var(--surface-alt)] hover:text-[var(--gold)] transition-colors">
-                                <i class="bi bi-person"></i> {{ __('auth.profile') }}
+                            <a href="{{ url('/profile') }}" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
+                                <i data-lucide="user" class="h-4 w-4"></i> {{ __('auth.profile') }}
                             </a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors">
-                                    <i class="bi bi-box-arrow-right"></i> {{ __('auth.sign_out') }}
+                                <button type="submit" class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-destructive hover:bg-destructive/10 transition-colors">
+                                    <i data-lucide="log-out" class="h-4 w-4"></i> {{ __('auth.sign_out') }}
                                 </button>
                             </form>
                         </div>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="inline-flex btn-ghost btn-sm">{{ __('auth.login') }}</a>
-                    <a href="{{ route('register') }}" class="btn-primary btn-sm btn-pill">
-                        {{ __('auth.book_now') }}
-                    </a>
+                    <a href="{{ route('login') }}" class="inline-flex btn-ghost btn-sm text-muted-foreground">{{ __('auth.login') }}</a>
+                    <x-ui.button href="{{ route('register') }}" variant="gold" size="sm">
+                        <i data-lucide="sparkles" class="h-4 w-4"></i> {{ __('auth.book_now') }}
+                    </x-ui.button>
                 @endauth
             </div>
 
-
-        </div>
-    </div>
-
-    {{-- Mobile dropdown (all items here on mobile) --}}
-    <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
-         x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0 -translate-y-2"
-         class="md:hidden border-t border-[var(--border-light)] bg-[var(--surface)] px-4 pb-4 pt-2">
-        <div class="flex flex-col gap-0.5">
-
-            {{-- Mobile nav links --}}
-            @foreach([
-                ['route' => 'home', 'name' => __('auth.home'), 'icon' => 'house-door', 'check' => 'home'],
-                ['route' => 'frontend.search', 'name' => __('auth.nav_hotels'), 'icon' => 'building', 'check' => 'frontend.search*|frontend.hotels*'],
-                ['route' => 'frontend.gallery', 'name' => __('auth.gallery'), 'icon' => 'image', 'check' => 'frontend.gallery*'],
-                ['route' => 'frontend.about', 'name' => __('auth.about'), 'icon' => 'info-circle', 'check' => 'frontend.about*'],
-                ['route' => 'frontend.contact', 'name' => __('auth.contact'), 'icon' => 'envelope', 'check' => 'frontend.contact*'],
-            ] as $item)
-                <a href="{{ route($item['route']) }}"
-                   @click="open = false"
-                   class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors
-                   {{ request()->routeIs($item['check']) ? 'bg-[var(--gold)]/8 text-[var(--gold)]' : 'text-[var(--text-secondary)] hover:bg-[var(--surface-alt)]' }}">
-                    <i class="bi bi-{{ $item['icon'] }}"></i> {{ $item['name'] }}
-                </a>
-            @endforeach
-
-            <div class="divider my-2"></div>
-
-            {{-- Mobile language + theme --}}
-            <div class="flex items-center gap-2 px-4 py-2">
-                @foreach(['en', 'ar', 'fr'] as $code)
-                    @if($locale !== $code)
-                        <a href="{{ route('language.switch', ['locale' => $code]) }}" @click="open = false"
-                           class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-all">
-                            {{ __('auth.' . $code) }}
-                        </a>
-                    @endif
-                @endforeach
-                <x-theme-toggle class="ms-auto w-8 h-8 rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-all" />
+            {{-- Mobile: theme + hamburger --}}
+            <div class="flex items-center gap-1 lg:hidden">
+                <x-theme-toggle class="btn-icon btn-ghost text-muted-foreground" />
+                <button @click="open = !open" class="btn-icon btn-ghost" aria-label="{{ __('auth.menu') }}">
+                    <i data-lucide="menu" class="h-5 w-5" :class="open && 'hidden'"></i>
+                    <i data-lucide="x" class="h-5 w-5 hidden" :class="open && 'block'"></i>
+                </button>
             </div>
-
-            <div class="divider my-2"></div>
-
-            @auth
-                @if(auth()->user()->isAdmin() || auth()->user()->isOwner())
-                    <a href="{{ route('admin.dashboard') }}" @click="open = false" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-[var(--text-secondary)] hover:bg-[var(--surface-alt)]">
-                        <i class="bi bi-grid-1x2"></i> {{ __('auth.dashboard') }}
-                    </a>
-                @endif
-                <a href="{{ route('frontend.booking.my-reservations') }}" @click="open = false" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-[var(--text-secondary)] hover:bg-[var(--surface-alt)]">
-                    <i class="bi bi-bookmark"></i> {{ __('auth.booking_my_reservations') }}
-                </a>
-                <a href="{{ route('customer.notifications') }}" @click="open = false" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-[var(--text-secondary)] hover:bg-[var(--surface-alt)]">
-                    <i class="bi bi-bell"></i> {{ __('notifications.title') }}
-                </a>
-                <a href="{{ url('/profile') }}" @click="open = false" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-[var(--text-secondary)] hover:bg-[var(--surface-alt)]">
-                    <i class="bi bi-person"></i> {{ __('auth.profile') }}
-                </a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20">
-                        <i class="bi bi-box-arrow-right"></i> {{ __('auth.sign_out') }}
-                    </button>
-                </form>
-            @else
-                <a href="{{ route('login') }}" @click="open = false" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-[var(--text-secondary)] hover:bg-[var(--surface-alt)]">
-                    <i class="bi bi-box-arrow-in-right"></i> {{ __('auth.login') }}
-                </a>
-                <div class="px-4 pt-1">
-                    <a href="{{ route('register') }}" @click="open = false" class="btn-primary btn-pill w-full text-center">{{ __('auth.book_now') }}</a>
-                </div>
-            @endauth
         </div>
     </div>
+
+    {{-- Mobile sheet --}}
+    <template x-teleport="body">
+        <div x-show="open" x-cloak class="fixed inset-0 z-[70] lg:hidden">
+            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                 @click="open = false" class="absolute inset-0 bg-foreground/50 backdrop-blur-sm"></div>
+
+            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="{{ $locale === 'ar' ? '-translate-x-full' : 'translate-x-full' }}"
+                 x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="translate-x-0" x-transition:leave-end="{{ $locale === 'ar' ? '-translate-x-full' : 'translate-x-full' }}"
+                 class="absolute inset-y-0 end-0 flex w-80 max-w-[85vw] flex-col border-s border-border bg-card shadow-2xl">
+                <div class="flex items-center justify-between border-b border-border px-4 py-3.5">
+                    <span class="flex items-center gap-2.5">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/80 font-serif text-sm font-black leading-none text-white">MD</span>
+                        <span class="text-base font-extrabold text-foreground">{{ __('auth.app_name') }}</span>
+                    </span>
+                    <button @click="open = false" class="btn-icon btn-ghost text-muted-foreground" aria-label="{{ __('auth.close') }}">
+                        <i data-lucide="x" class="h-5 w-5"></i>
+                    </button>
+                </div>
+
+                <div class="flex-1 overflow-y-auto px-3 py-4">
+                    <div class="flex flex-col gap-1">
+                        @foreach([
+                            ['route' => 'home', 'name' => __('auth.home'), 'icon' => 'house', 'check' => 'home'],
+                            ['route' => 'frontend.search', 'name' => __('auth.nav_hotels'), 'icon' => 'building-2', 'check' => 'frontend.search*|frontend.hotels*'],
+                            ['route' => 'frontend.gallery', 'name' => __('auth.gallery'), 'icon' => 'images', 'check' => 'frontend.gallery*'],
+                            ['route' => 'frontend.about', 'name' => __('auth.about'), 'icon' => 'info', 'check' => 'frontend.about*'],
+                            ['route' => 'frontend.contact', 'name' => __('auth.contact'), 'icon' => 'mail', 'check' => 'frontend.contact*'],
+                        ] as $item)
+                            <a href="{{ route($item['route']) }}"
+                               @click="open = false"
+                               class="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors
+                               {{ request()->routeIs($item['check']) ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-muted hover:text-foreground' }}">
+                                <i data-lucide="{{ $item['icon'] }}" class="h-4.5 w-4.5"></i> {{ $item['name'] }}
+                            </a>
+                        @endforeach
+                    </div>
+
+                    <div class="my-3 h-px bg-border"></div>
+
+                    <div class="flex items-center gap-2 px-4 py-2">
+                        @foreach(['en', 'ar', 'fr'] as $code)
+                            @if($locale !== $code)
+                                <a href="{{ route('language.switch', ['locale' => $code]) }}" @click="open = false"
+                                   class="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:border-primary hover:text-primary transition-all">
+                                    {{ __('auth.' . $code) }}
+                                </a>
+                            @endif
+                        @endforeach
+                    </div>
+
+                    <div class="my-3 h-px bg-border"></div>
+
+                    @auth
+                        @if(auth()->user()->isAdmin() || auth()->user()->isOwner())
+                            <a href="{{ route('admin.dashboard') }}" @click="open = false" class="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground">
+                                <i data-lucide="layout-grid" class="h-4.5 w-4.5"></i> {{ __('auth.dashboard') }}
+                            </a>
+                        @endif
+                        <a href="{{ route('frontend.booking.my-reservations') }}" @click="open = false" class="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground">
+                            <i data-lucide="bookmark" class="h-4.5 w-4.5"></i> {{ __('auth.booking_my_reservations') }}
+                        </a>
+                        <a href="{{ route('customer.notifications') }}" @click="open = false" class="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground">
+                            <i data-lucide="bell" class="h-4.5 w-4.5"></i> {{ __('notifications.title') }}
+                        </a>
+                        <a href="{{ url('/profile') }}" @click="open = false" class="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground">
+                            <i data-lucide="user" class="h-4.5 w-4.5"></i> {{ __('auth.profile') }}
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="flex items-center gap-3 w-full rounded-lg px-4 py-3 text-sm font-medium text-destructive hover:bg-destructive/10">
+                                <i data-lucide="log-out" class="h-4.5 w-4.5"></i> {{ __('auth.sign_out') }}
+                            </button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" @click="open = false" class="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground">
+                            <i data-lucide="log-in" class="h-4.5 w-4.5"></i> {{ __('auth.login') }}
+                        </a>
+                        <div class="px-4 pt-1">
+                            <a href="{{ route('register') }}" @click="open = false" class="flex w-full items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/80 px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/20 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30">
+                                {{ __('auth.book_now') }}
+                            </a>
+                        </div>
+                    @endauth
+                </div>
+            </div>
+        </div>
+    </template>
 </nav>

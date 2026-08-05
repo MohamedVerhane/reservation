@@ -144,7 +144,16 @@ class BookingService
     {
         $reservation->load(['hotel', 'room.roomType', 'user']);
 
-        $reservation->user->notify(new BookingConfirmed($reservation));
+        try {
+            $reservation->user->notify(new BookingConfirmed($reservation));
+        } catch (\Throwable $e) {
+            report($e);
+        }
+
+        // Mail providers cap the send rate (~1 email/second on Mailtrap free).
+        // Keep the gap so the next notification isn't rejected with a 550.
+        usleep(1100000);
+
         $this->notifyAdminsNewBooking($reservation);
     }
 }

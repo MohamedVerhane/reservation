@@ -13,4 +13,7 @@ return [
     'no_available' => 'No rooms available',
     'price_per_night' => 'per night',
     'room_number' => 'Room #',
+    'occupied' => 'Occupied',
+    'maintenance' => 'Maintenance',
+    'reserved' => 'Reserved',
 ];

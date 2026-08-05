@@ -13,4 +13,7 @@ return [
     'no_available' => 'لا توجد غرف متاحة',
     'price_per_night' => 'للليلة',
     'room_number' => 'رقم الغرفة',
+    'occupied' => 'مشغولة',
+    'maintenance' => 'صيانة',
+    'reserved' => 'محجوزة',
 ];

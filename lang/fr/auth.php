@@ -10,6 +10,7 @@ return [
 
     // Frontend Navigation
     'nav_home' => 'Accueil', 'nav_hotels' => 'Hôtels', 'nav_about' => 'À propos', 'nav_contact' => 'Contact', 'nav_gallery' => 'Galerie', 'nav_book_now' => 'Réserver', 'nav_admin' => 'Tableau de bord',
+    'menu' => 'Menu', 'close' => 'Fermer',
 
     // Home Page
     'home_hero_title' => ' Vivez le Luxe', 'home_hero_subtitle' => 'Découvrez les hôtels et resorts les plus exclusifs au monde. Plongez dans un confort et une sophistication inégalés.', 'home_hero_cta' => 'Découvrir les Hôtels', 'home_hero_cta2' => 'Faire le Tour',
@@ -18,6 +19,12 @@ return [
     'home_stats_hotels' => 'Hôtels de Luxe', 'home_stats_rooms' => 'Chambres Premium', 'home_stats_guests' => 'Clients Satisfaits', 'home_stats_awards' => 'Prix Remportés',
     'home_cta_title' => 'Prêt pour un Séjour Inoubliable ?', 'home_cta_text' => 'Réservez vos vacances de rêve aujourd\'hui et vivez le summum de l\'hôtellerie de luxe.', 'home_cta_button' => 'Commencer la Réservation',
     'home_view_all' => 'Voir Tout', 'home_view_details' => 'Voir Détails', 'home_per_night' => '/ nuit', 'home_from' => 'À partir de', 'home_reviews' => 'avis', 'home_night' => 'nuit', 'view_details' => 'Voir Détails',
+    'home_features_title' => 'Pourquoi LuxeStay', 'home_features_subtitle' => 'Chaque séjour, soigneusement pensé pour dépasser vos attentes.',
+    'home_feature_price' => 'Meilleur Prix Garanti', 'home_feature_price_text' => 'Trouvé moins cher ailleurs ? Nous égalons le tarif et récompensons votre fidélité.',
+    'home_feature_concierge' => 'Conciergerie 24/7', 'home_feature_concierge_text' => 'Assistance permanente de l\'arrivée au départ, dans toutes les langues.',
+    'home_feature_clean' => 'Désinfection Premium', 'home_feature_clean_text' => 'Des normes d\'hygiène hospitalières dans chaque chambre, à chaque fois.',
+    'home_feature_award' => 'Séjours Primés', 'home_feature_award_text' => 'Reconnu mondialement pour un accueil exceptionnel et un souci du détail.',
+    'home_trust_label' => 'Approuvé par plus de 120 000 voyageurs dans 40 pays',
 
     // Hotels Page
     'hotels_title' => 'Nos Hôtels', 'hotels_subtitle' => 'Explorez notre collection d\'hôtels et resorts de classe mondiale',
@@ -78,7 +85,7 @@ return [
     'footer_quick_links' => 'Liens Rapides', 'footer_contact' => 'Nous Contacter', 'footer_newsletter' => 'Newsletter', 'footer_newsletter_text' => 'Abonnez-vous pour des offres exclusives et des mises à jour.', 'footer_subscribe' => 'S\'abonner', 'footer_email_placeholder' => 'Entrez votre e-mail',     'footer_rights' => 'Tous droits réservés.', 'footer_privacy' => 'Politique de Confidentialité', 'footer_terms' => 'Conditions d\'Utilisation',
 
     // Shared
-    'luxury' => 'Luxe', 'reviews' => 'avis', 'rooms' => 'chambres', 'amenities' => 'équipements', 'night' => 'nuit', 'nights' => 'nuits',
+    'luxury' => 'Luxe', 'reviews' => 'avis', 'rooms' => 'chambres', 'amenities' => 'équipements', 'night' => 'nuit', 'nights' => 'nuits', 'star' => 'Étoile',
     'max' => 'Max', 'guests' => 'voyageurs', 'children' => 'enfants', 'total' => 'Total', 'select' => 'Choisir', 'edit' => 'Modifier',
     'hotel' => 'Hôtel', 'room' => 'Chambre', 'room_number' => 'Chambre n°', 'floor' => 'Étage', 'check_in' => 'Arrivée', 'check_out' => 'Départ',
     'adults' => 'Adultes', 'status' => 'Statut', 'payment_method' => 'Mode de Paiement',

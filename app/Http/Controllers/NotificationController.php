@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\View\View;
@@ -22,7 +23,7 @@ class NotificationController extends Controller
         return view($viewName ?? 'frontend.notifications', compact('notifications', 'unreadCount'));
     }
 
-    public function markRead(DatabaseNotification $notification): RedirectResponse
+    public function markRead(DatabaseNotification $notification): RedirectResponse|JsonResponse
     {
         abort_unless($notification->notifiable_id === auth()->id(), 403);
 
@@ -31,14 +32,14 @@ class NotificationController extends Controller
         return redirect()->back()->orJson();
     }
 
-    public function markAllRead(Request $request): RedirectResponse
+    public function markAllRead(Request $request): RedirectResponse|JsonResponse
     {
         $request->user()->unreadNotifications()->update(['read_at' => now()]);
 
         return redirect()->back()->with('success', __('auth.notif_all_read'))->orJson();
     }
 
-    public function destroy(DatabaseNotification $notification): RedirectResponse
+    public function destroy(DatabaseNotification $notification): RedirectResponse|JsonResponse
     {
         abort_unless($notification->notifiable_id === auth()->id(), 403);
 

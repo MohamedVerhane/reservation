@@ -30,22 +30,25 @@ class PopulateDataSeeder extends Seeder
      * actually renders real photos (paths are relative to the public disk).
      */
     private array $hotelCovers = [
-        'hotels/CfYrR9WLHf5yMWIKma8FlG05Um5xfbVBDFbsrbTX.png',
-        'hotels/Fovn8p5H7STzkN7HC5aO44z6BSuowB75w0PuFaLb.png',
-        'hotels/jxqkFBZcVyZvUsRBobkGv6xSdQY9Okvofu0O7K0u.png',
-        'hotels/NlawtgyBR8qoXuJQl0jl0m0BbsY8ZC5CTTu6g0yH.jpg',
+        'hotels/hotel-1.png',
+        'hotels/hotel-2.png',
+        'hotels/hotel-3.png',
+        'hotels/hotel-4.png',
     ];
 
     private array $roomImages = [
-        'rooms/4JBkHoySy2y6sSDqnsdaP4BLbNM64mLwGZ18CQ78.png',
-        'rooms/94NRZmlAAqts5EvTQB3mPYmqKsYFEv2dhHBUKmKG.png',
-        'rooms/AVP0784Fn2YxMWYya5g2ULbmdTrh6Sju0y3dBIZV.png',
-        'rooms/G5U6SOzga5cC1sFB8kjNvTSOYnCUa8pt7uOrmroB.jpg',
-        'rooms/H0UjpHAp0NhEsUqZvh1XYUQy9E018RKct7sAHlEI.png',
-        'rooms/iOk8Val1qVxb5QouQ1DKz3R0tpAtqvgSh2OB4vpN.png',
-        'rooms/t011jE4r4VVaAOJxOULd5OvA9rEkdWJaa3pHKNZl.png',
-        'rooms/VJhJdlhXAhaUwMNreb85imufKlRIhVhw2zZQojjY.png',
-        'rooms/vPR8bxoUCcccJYwov2IdOagU0f85YTAVH3cjTIRO.png',
+        'rooms/room-1.png',
+        'rooms/room-2.png',
+        'rooms/room-3.png',
+        'rooms/room-4.png',
+        'rooms/room-5.png',
+        'rooms/room-6.png',
+        'rooms/room-7.png',
+        'rooms/room-8.png',
+        'rooms/room-9.png',
+        'rooms/room-10.png',
+        'rooms/room-11.png',
+        'rooms/room-12.png',
     ];
 
     public function run(): void

@@ -4,11 +4,94 @@ import "./admin-filters";
 import "./admin-forms";
 import "./room-type-filter";
 import "./ajax-actions";
+import { createIcons } from "lucide";
+import {
+    ArrowRight, AtSign, Award, BadgeDollarSign, Bell, Bookmark, Briefcase,
+    Building2, CalendarCheck, Camera, ChevronDown, ChevronRight, Clock,
+    ConciergeBell, Crown, DoorOpen, Gem, Hash, House, Images, Info, Layers,
+    LayoutGrid, LogIn, LogOut, Mail, MapPin, Menu, MessageCircle, Phone, Play,
+    Search, ShieldCheck, Sparkles, SprayCan, Star, ThumbsUp, User, Users, X,
+} from "lucide";
 
 window.Alpine = Alpine;
+
+// ── 3D tilt card (perspective + glare) ──
+Alpine.data("tiltCard", (opts = {}) => ({
+    max: opts.max ?? 12,
+    glare: opts.glare ?? true,
+    px: 0,
+    py: 0,
+    rx: 0,
+    ry: 0,
+    sx: 1,
+    gx: 50,
+    gy: 50,
+    onMove(e) {
+        const r = this.$el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width; // 0..1
+        const y = (e.clientY - r.top) / r.height; // 0..1
+        this.px = x - 0.5;
+        this.py = y - 0.5;
+        this.ry = this.px * this.max * 2;
+        this.rx = -this.py * this.max * 2;
+        this.gx = x * 100;
+        this.gy = y * 100;
+        this.sx = 1.025;
+    },
+    onLeave() {
+        this.rx = 0;
+        this.ry = 0;
+        this.px = 0;
+        this.py = 0;
+        this.sx = 1;
+    },
+    style() {
+        return {
+            transform: `perspective(1000px) rotateX(${this.rx.toFixed(2)}deg) rotateY(${this.ry.toFixed(2)}deg) scale3d(${this.sx}, ${this.sx}, ${this.sx})`,
+            transition: this.sx > 1 ? "transform 80ms linear" : "transform 600ms cubic-bezier(.22,.61,.36,1)",
+        };
+    },
+    glareStyle() {
+        return {
+            background: `radial-gradient(circle at ${this.gx}% ${this.gy}%, rgba(255,255,255,.35), transparent 55%)`,
+            opacity: (this.glare ? this.sx - 1 : 0) * 4,
+        };
+    },
+}));
+
+// ── 3D mouse parallax for layered sections (hero) ──
+document.addEventListener("alpine:init", () => {
+    Alpine.data("heroParallax", () => ({
+        x: 0,
+        y: 0,
+        onMove(e) {
+            this.x = e.clientX / window.innerWidth - 0.5;
+            this.y = e.clientY / window.innerHeight - 0.5;
+        },
+        onLeave() {
+            this.x = 0;
+            this.y = 0;
+        },
+        far() { return `translate3d(${this.x * -22}px, ${this.y * -16}px, 0)`; },
+        mid() { return `translate3d(${this.x * 14}px, ${this.y * 10}px, 0)`; },
+        near() { return `translate3d(${this.x * -12}px, ${this.y * 18}px, 0)`; },
+    }));
+});
+
 Alpine.start();
 
 document.addEventListener("DOMContentLoaded", () => {
+    // ── Lucide icons ──
+    createIcons({
+        icons: {
+            ArrowRight, AtSign, Award, BadgeDollarSign, Bell, Bookmark, Briefcase,
+            Building2, CalendarCheck, Camera, ChevronDown, ChevronRight, Clock,
+            ConciergeBell, Crown, DoorOpen, Gem, Hash, House, Images, Info, Layers,
+            LayoutGrid, LogIn, LogOut, Mail, MapPin, Menu, MessageCircle, Phone, Play,
+            Search, ShieldCheck, Sparkles, SprayCan, Star, ThumbsUp, User, Users, X,
+        },
+    });
+
     // ── Dark mode toggle (initialization only — click handler uses event delegation in layout) ──
     function updateToggleIcons() {
         const isDark = document.documentElement.classList.contains("dark");

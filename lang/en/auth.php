@@ -10,6 +10,7 @@ return [
 
     // Frontend Navigation
     'nav_home' => 'Home', 'nav_hotels' => 'Hotels', 'nav_about' => 'About', 'nav_contact' => 'Contact', 'nav_gallery' => 'Gallery', 'nav_book_now' => 'Book Now', 'nav_admin' => 'Dashboard',
+    'menu' => 'Menu', 'close' => 'Close',
 
     // Home Page
     'home_hero_title' => 'Experience Luxury Living', 'home_hero_subtitle' => 'Discover the world\'s most exclusive hotels and resorts. Immerse yourself in unparalleled comfort and sophistication.', 'home_hero_cta' => 'Explore Hotels', 'home_hero_cta2' => 'Take a Tour',
@@ -18,6 +19,12 @@ return [
     'home_stats_hotels' => 'Luxury Hotels', 'home_stats_rooms' => 'Premium Rooms', 'home_stats_guests' => 'Happy Guests', 'home_stats_awards' => 'Awards Won',
     'home_cta_title' => 'Ready for an Unforgettable Stay?', 'home_cta_text' => 'Book your dream vacation today and experience the pinnacle of luxury hospitality.', 'home_cta_button' => 'Start Booking',
     'home_view_all' => 'View All', 'home_view_details' => 'View Details', 'home_per_night' => '/ night', 'home_from' => 'From', 'home_reviews' => 'reviews', 'home_night' => 'night', 'view_details' => 'View Details',
+    'home_features_title' => 'Why LuxeStay', 'home_features_subtitle' => 'Every stay, thoughtfully curated to exceed expectations.',
+    'home_feature_price' => 'Best Price Guarantee', 'home_feature_price_text' => 'Found it cheaper elsewhere? We match the rate and reward your loyalty.',
+    'home_feature_concierge' => '24/7 Concierge', 'home_feature_concierge_text' => 'Around-the-clock assistance from check-in to checkout, in any language.',
+    'home_feature_clean' => 'Premium Sanitization', 'home_feature_clean_text' => 'Hospital-grade cleanliness standards in every room, every single time.',
+    'home_feature_award' => 'Award-Winning Stays', 'home_feature_award_text' => 'Recognized worldwide for outstanding hospitality and attention to detail.',
+    'home_trust_label' => 'Trusted by 120,000+ travelers across 40 countries',
 
     // Hotels Page
     'hotels_title' => 'Our Hotels', 'hotels_subtitle' => 'Explore our collection of world-class hotels and resorts',
@@ -78,7 +85,7 @@ return [
     'footer_quick_links' => 'Quick Links', 'footer_contact' => 'Contact Us', 'footer_newsletter' => 'Newsletter', 'footer_newsletter_text' => 'Subscribe for exclusive offers and updates.', 'footer_subscribe' => 'Subscribe', 'footer_email_placeholder' => 'Enter your email', 'footer_rights' => 'All rights reserved.', 'footer_privacy' => 'Privacy Policy', 'footer_terms' => 'Terms of Service',
 
     // Shared
-    'luxury' => 'Luxury', 'reviews' => 'reviews', 'rooms' => 'rooms', 'amenities' => 'amenities', 'night' => 'night', 'nights' => 'nights',
+    'luxury' => 'Luxury', 'reviews' => 'reviews', 'rooms' => 'rooms', 'amenities' => 'amenities', 'night' => 'night', 'nights' => 'nights', 'star' => 'Star',
     'max' => 'Max', 'guests' => 'guests', 'children' => 'children', 'total' => 'Total', 'select' => 'Select', 'edit' => 'Edit',
     'hotel' => 'Hotel', 'room' => 'Room', 'room_number' => 'Room #', 'floor' => 'Floor', 'check_in' => 'Check In', 'check_out' => 'Check Out',
     'adults' => 'Adults', 'status' => 'Status', 'payment_method' => 'Payment Method',
