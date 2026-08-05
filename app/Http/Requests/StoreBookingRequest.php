@@ -101,6 +101,13 @@ class StoreBookingRequest extends FormRequest
                     'This room is no longer available for the selected dates. Please choose another room.'
                 );
             }
+
+            if ($room && (int) $room->hotel_id !== (int) $this->input('hotel_id')) {
+                $validator->errors()->add(
+                    'room_id',
+                    __('validation-custom.room_hotel_mismatch')
+                );
+            }
         });
     }
 }

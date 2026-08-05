@@ -45,4 +45,18 @@ class StoreBookingRequest extends FormRequest
             'payment_method.in'     => __('validation-custom.payment_method_invalid'),
         ];
     }
+
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator) {
+            $room = Room::find($this->input('room_id'));
+
+            if ($room && (int) $room->hotel_id !== (int) $this->input('hotel_id')) {
+                $validator->errors()->add(
+                    'room_id',
+                    __('validation-custom.room_hotel_mismatch')
+                );
+            }
+        });
+    }
 }

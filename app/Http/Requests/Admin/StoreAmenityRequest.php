@@ -16,7 +16,7 @@ class StoreAmenityRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255', 'unique:amenities,name'],
-            'icon' => ['nullable', 'string', 'max:255'],
+            'icon' => ['nullable', 'string', 'max:100', 'regex:/^[a-zA-Z0-9]+(?:[ -][a-zA-Z0-9]+)*$/'],
             'is_active' => ['boolean'],
         ];
     }

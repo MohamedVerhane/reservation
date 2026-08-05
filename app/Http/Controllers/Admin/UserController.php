@@ -54,7 +54,15 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request): RedirectResponse|JsonResponse
     {
-        User::create($request->validated());
+        $data = $request->validated();
+
+        // Only a full admin may create or grant the admin role; owners are
+        // scoped and must never be able to escalate privileges.
+        if (($data['role'] ?? 'guest') === 'admin' && ! auth()->user()->isAdmin()) {
+            abort(403, __('admin.user.admin_only'));
+        }
+
+        User::create($data);
 
         return redirect()->route('admin.users.index')
             ->with('success', __('admin.user.created'))
@@ -83,6 +91,13 @@ class UserController extends Controller
 
         if (empty($data['password'])) {
             unset($data['password']);
+        }
+
+        // Only a full admin may manage admin accounts or grant the admin role;
+        // owners are scoped and must never escalate privileges.
+        $newRole = $data['role'] ?? $user->role;
+        if (! auth()->user()->isAdmin() && ($newRole === 'admin' || $user->isAdmin())) {
+            abort(403, __('admin.user.admin_only'));
         }
 
         $user->update($data);

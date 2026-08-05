@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api\V1;
 
+use App\Models\Reservation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -30,5 +31,28 @@ class StoreReviewRequest extends FormRequest
             'rating.max'            => __('validation-custom.rating_max'),
             'reservation_id.unique' => __('validation-custom.rating_already_submitted'),
         ];
+    }
+
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator) {
+            $reservationId = $this->input('reservation_id');
+
+            if ($reservationId === null) {
+                return;
+            }
+
+            $owned = Reservation::where('id', $reservationId)
+                ->where('user_id', $this->user()?->id)
+                ->whereIn('status', ['completed', 'checked_out', 'confirmed'])
+                ->exists();
+
+            if (! $owned) {
+                $validator->errors()->add(
+                    'reservation_id',
+                    __('validation-custom.rating_reservation_not_owned')
+                );
+            }
+        });
     }
 }

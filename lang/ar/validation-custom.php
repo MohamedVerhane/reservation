@@ -49,4 +49,6 @@ return [
     'amenity_name.required' => 'يرجى إدخال اسم المرفق.',
     'amenity_name.unique' => 'اسم المرفق موجود بالفعل.',
     'title.required' => 'يرجى إدخال عنوان.',
+    'rating_reservation_not_owned' => 'يمكنك مراجعة حجز يخصك فقط.',
+    'room_hotel_mismatch' => 'الغرفة المحددة لا تنتمي إلى الفندق المحدد.',
 ];

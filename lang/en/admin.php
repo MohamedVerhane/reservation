@@ -37,6 +37,7 @@ return [
     'user.created' => 'User created successfully.',
     'user.updated' => 'User updated successfully.',
     'user.deleted' => 'User deleted successfully.',
+        'user.admin_only' => 'Only an administrator can manage admin accounts.',
     'user.restored' => 'User restored successfully.',
     'user.permanently_deleted' => 'User permanently deleted.',
 

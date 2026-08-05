@@ -70,7 +70,6 @@ class Review extends Model
         'comment',
         'reply',
         'replied_at',
-        'is_approved',
     ];
 
     protected function casts(): array
@@ -173,12 +172,16 @@ class Review extends Model
 
     public function approve(): bool
     {
-        return $this->update(['is_approved' => true]);
+        $this->is_approved = true;
+
+        return $this->save();
     }
 
     public function reject(): bool
     {
-        return $this->update(['is_approved' => false]);
+        $this->is_approved = false;
+
+        return $this->save();
     }
 
     public function isApproved(): bool

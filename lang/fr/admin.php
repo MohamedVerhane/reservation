@@ -32,6 +32,7 @@ return [
     'user.created' => 'Utilisateur créé avec succès.',
     'user.updated' => 'Utilisateur mis à jour avec succès.',
     'user.deleted' => 'Utilisateur supprimé avec succès.',
+        'user.admin_only' => 'Seul un administrateur peut gérer les comptes administrateur.',
     'user.restored' => 'Utilisateur restauré avec succès.',
     'user.permanently_deleted' => 'Utilisateur supprimé définitivement.',
 

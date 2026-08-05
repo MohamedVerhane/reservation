@@ -49,4 +49,6 @@ return [
     'amenity_name.required' => 'Veuillez entrer un nom d\'équipement.',
     'amenity_name.unique' => 'Ce nom d\'équipement existe déjà.',
     'title.required' => 'Veuillez entrer un titre.',
+    'rating_reservation_not_owned' => 'Vous ne pouvez évaluer qu\'une réservation qui vous appartient.',
+    'room_hotel_mismatch' => 'La chambre sélectionnée n\'appartient pas à l\'hôtel sélectionné.',
 ];

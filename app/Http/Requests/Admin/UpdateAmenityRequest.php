@@ -22,7 +22,7 @@ class UpdateAmenityRequest extends FormRequest
                 'max:255',
                 Rule::unique('amenities', 'name')->ignore($this->route('amenity')?->id),
             ],
-            'icon' => ['nullable', 'string', 'max:255'],
+            'icon' => ['nullable', 'string', 'max:100', 'regex:/^[a-zA-Z0-9]+(?:[ -][a-zA-Z0-9]+)*$/'],
             'is_active' => ['boolean'],
         ];
     }

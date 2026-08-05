@@ -10,7 +10,7 @@
 
 <span class="inline-flex items-center gap-1.5 rounded-full border border-[var(--gold)]/20 bg-[var(--gold)]/5 {{ $sizeClasses }} text-[var(--text-secondary)]">
     <span class="text-[var(--gold)]">
-        {!! $amenity->icon !!}
+        <i class="{{ $amenity->icon }}"></i>
     </span>
     <span>{{ $amenity->name }}</span>
 </span>

@@ -87,7 +87,7 @@
                 <div class="mt-6 flex flex-wrap gap-2 animate-fade-in-up delay-200">
                     @foreach($availableAmenities->take(8) as $amenity)
                         <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-sm text-white backdrop-blur-md transition-all hover:bg-white/20">
-                            <span class="text-[var(--gold-light)]">{!! $amenity->icon !!}</span>
+                            <span class="text-[var(--gold-light)]"><i class="{{ $amenity->icon }}"></i></span>
                             {{ $amenity->name }}
                         </span>
                     @endforeach

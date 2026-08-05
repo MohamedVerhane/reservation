@@ -45,7 +45,7 @@
 
             @foreach($lines as $line)
                 @if(is_string($line))
-                    <p class="text">{!! $line !!}</p>
+                    <p class="text">{{ $line }}</p>
                 @endif
             @endforeach
 

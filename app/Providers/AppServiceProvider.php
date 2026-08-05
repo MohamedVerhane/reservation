@@ -18,6 +18,12 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(BookingService::class, fn () => new BookingService);
         $this->app->singleton(AvailabilityService::class, fn () => new AvailabilityService);
+
+        // Hard safety net: never ship detailed error pages / stack traces in
+        // production, even if APP_DEBUG is accidentally left on in .env.
+        if (app()->environment('production')) {
+            config(['app.debug' => false]);
+        }
     }
 
     public function boot(): void

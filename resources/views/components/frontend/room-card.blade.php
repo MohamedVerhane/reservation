@@ -88,7 +88,7 @@
             <div class="mb-5 flex flex-wrap items-center gap-1.5">
                 @foreach($amenities->take(3) as $amenity)
                     <span class="inline-flex items-center gap-1 rounded-full bg-secondary px-2 py-1 text-xs font-medium text-secondary-foreground">
-                        <span class="text-primary">{!! $amenity->icon !!}</span>
+                        <span class="text-primary"><i class="{{ $amenity->icon }}"></i></span>
                         {{ $amenity->name }}
                     </span>
                 @endforeach

@@ -49,4 +49,6 @@ return [
     'amenity_name.required' => 'Please enter an amenity name.',
     'amenity_name.unique' => 'This amenity name already exists.',
     'title.required' => 'Please enter a title.',
+    'rating_reservation_not_owned' => 'You can only review a reservation that belongs to you.',
+    'room_hotel_mismatch' => 'The selected room does not belong to the selected hotel.',
 ];
