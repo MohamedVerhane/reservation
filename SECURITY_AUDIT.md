@@ -1,4 +1,4 @@
-# تقرير المراجعة الأمنية — LuxeStay
+# تقرير المراجعة الأمنية — ReserHotel
 
 > **النطاق:** تطبيق ويب Laravel 12 (Blade + Alpine + Tailwind v4) لحجز الفنادق.
 > **المنهجية:** OWASP Web Security Testing Guide + OWASP Top 10.

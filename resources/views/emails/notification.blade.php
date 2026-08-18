@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $subject ?? config('app.name', 'LuxeStay') }}</title>
+    <title>{{ $subject ?? config('app.name', 'ReserHotel') }}</title>
     <style>
         body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f8fafc; margin: 0; padding: 0; }
         .container { max-width: 600px; margin: 0 auto; background: #ffffff; }
@@ -34,7 +34,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>{{ config('app.name', 'LuxeStay') }}</h1>
+            <h1>{{ config('app.name', 'ReserHotel') }}</h1>
             <p>{{ __('auth.app_name') }}</p>
         </div>
 

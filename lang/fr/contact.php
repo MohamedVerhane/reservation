@@ -16,6 +16,6 @@ return [
     'phone_title' => 'Téléphone',
     'phone_detail' => '+971 4 123 4567',
     'email_title' => 'E-mail',
-    'email_detail' => 'hello@luxestay.com',
+    'email_detail' => 'hello@reserhotel.com',
     'success' => 'Votre message a été envoyé avec succès !',
 ];

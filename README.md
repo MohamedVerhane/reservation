@@ -1,4 +1,4 @@
-# LuxeStay
+# ReserHotel
 
 > A premium hotel booking and management platform built with Laravel 12, Blade, Alpine.js, and Tailwind CSS v4.
 
@@ -26,7 +26,7 @@
 
 ## About
 
-LuxeStay is a full-featured luxury hotel reservation system with a public-facing booking site, a customer dashboard, and an admin panel. It supports multi-hotel management, real-time availability checks, multiple payment gateways, and a REST API — all wrapped in a responsive UI with dark mode and multilingual support (English, Arabic with RTL, and French).
+ReserHotel is a full-featured luxury hotel reservation system with a public-facing booking site, a customer dashboard, and an admin panel. It supports multi-hotel management, real-time availability checks, multiple payment gateways, and a REST API — all wrapped in a responsive UI with dark mode and multilingual support (English, Arabic with RTL, and French).
 
 ---
 
@@ -221,7 +221,7 @@ Default is **SQLite** (zero config). For MySQL, update `.env`:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=luxestay
+DB_DATABASE=reserhotel
 DB_USERNAME=root
 DB_PASSWORD=secret
 ```
@@ -248,7 +248,7 @@ DB_PASSWORD=secret
 Key environment variables (see `.env.example` for full list):
 
 ```env
-APP_NAME=LuxeStay
+APP_NAME=ReserHotel
 APP_ENV=local
 APP_DEBUG=true
 APP_URL=http://127.0.0.1:8000

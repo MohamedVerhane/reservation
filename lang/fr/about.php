@@ -8,7 +8,7 @@ return [
     'mission_text' => 'Créer des moments inoubliables pour chaque client grâce à un service irréprochable, des espaces magnifiques et des expériences authentiques qui célèbrent le caractère unique de chaque destination.',
     'values_title' => 'Nos Valeurs',
     'team_title' => 'Équipe de Direction',
-    'story_p1' => 'Né d\'une passion pour l\'hôtellerie exceptionnelle, LuxeStay est passé d\'un seul établissement de charme à une collection mondiale d\'hôtels de luxe. Nous croyons que chaque voyage mérite une destination remarquable.',
+    'story_p1' => 'Né d\'une passion pour l\'hôtellerie exceptionnelle, ReserHotel est passé d\'un seul établissement de charme à une collection mondiale d\'hôtels de luxe. Nous croyons que chaque voyage mérite une destination remarquable.',
     'story_p2' => 'Au cours de la dernière décennie, nous avons accueilli des milliers de clients du monde entier, gagnant une réputation d\'excellence en matière de service, de design et d\'expériences locales authentiques. Notre portefeuille s\'étend sur plusieurs continents, chaque propriété reflétant le caractère unique de sa destination.',
     'value_excellence_title' => 'Excellence',
     'value_excellence_desc' => 'Nous recherchons les plus hauts standards dans chaque détail, du nombre de fils au service de conciergerie.',

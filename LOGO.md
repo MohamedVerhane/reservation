@@ -1,20 +1,20 @@
-# LuxeStay — Brand Logo Guide
+# ReserHotel — Brand Logo Guide
 
-> Site: **LuxeStay** — a curated collection of luxury hotels & resorts.
+> Site: **ReserHotel** — a curated collection of luxury hotels & resorts.
 > Framework context: Laravel 12 · Blade · Alpine.js · Tailwind CSS v4 (shadcn-style tokens)
 
 ---
 
 ## 1. Overview
 
-The LuxeStay logo communicates **two-color luxury hospitality**: warmth and trust
+The ReserHotel logo communicates **two-color luxury hospitality**: warmth and trust
 (red) meeting calm, curated comfort (green). It pairs a geometric emblem with the
 wordmark for a premium, editorial feel.
 
 - Emblem: an **MD monogram** — the brand initials set in Fraunces Black on the
   signature red tile. A monogram reads clearly at small sizes (avatar, favicon)
   and pairs cleanly with the wordmark.
-- Wordmark: **LuxeStay**.
+- Wordmark: **ReserHotel**.
 - Baseline (optional): "Premium Hotels & Resorts".
 
 ### Design intent
@@ -55,7 +55,7 @@ Two harmonious colors. Red is the action/brand primary; green is the accent/trus
 | Body / UI  | Manrope / Cairo (ar) | 400–600 |
 | Arabic     | Cairo / Amiri     | —               |
 
-- Wordmark casing: **Title Case** (`LuxeStay`, never all-caps; the "S" is capital for the compound word).
+- Wordmark casing: **Title Case** (`ReserHotel`, never all-caps; the "S" is capital for the compound word).
 - Letter-spacing on wordmark: `tracking-tight`; optional `tracking-widest` only on the tagline.
 
 ---
@@ -70,7 +70,7 @@ Two harmonious colors. Red is the action/brand primary; green is the accent/trus
   `gap` of `0.625rem` (10px) between emblem and wordmark.
 
 ```
-[ ◆ ]  LuxeStay
+[ ◆ ]  ReserHotel
 ```
 
 ---
@@ -96,7 +96,7 @@ The logo is rendered inline (no image asset) as:
 ```blade
 {{-- navbar / footer brand box --}}
 <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/80 font-serif text-sm font-black leading-none text-white shadow-sm shadow-primary/25">MD</span>
-<span class="text-lg font-extrabold tracking-tight text-foreground">LuxeStay</span>
+<span class="text-lg font-extrabold tracking-tight text-foreground">ReserHotel</span>
 ```
 
 - Monogram: **MD** rendered in `font-serif` (Fraunces) Black, inherited theme colors.

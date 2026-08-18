@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: Auth
+      MYSQL_DATABASE: reserhotel
     ports:
       - "3306:3306"
     volumes:

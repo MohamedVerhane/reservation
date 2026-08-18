@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'home' => 'Home - LuxeStay',
-    'hotels' => 'Hotels - LuxeStay',
-    'about' => 'About Us - LuxeStay',
-    'contact' => 'Contact Us - LuxeStay',
-    'gallery' => 'Gallery - LuxeStay',
-    'my_reservations' => 'My Reservations - LuxeStay',
-    'notifications' => 'Notifications - LuxeStay',
-    'search' => 'Search Hotels - LuxeStay',
+    'home' => 'Home - ReserHotel',
+    'hotels' => 'Hotels - ReserHotel',
+    'about' => 'About Us - ReserHotel',
+    'contact' => 'Contact Us - ReserHotel',
+    'gallery' => 'Gallery - ReserHotel',
+    'my_reservations' => 'My Reservations - ReserHotel',
+    'notifications' => 'Notifications - ReserHotel',
+    'search' => 'Search Hotels - ReserHotel',
 ];

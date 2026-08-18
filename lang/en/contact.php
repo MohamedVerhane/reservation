@@ -16,6 +16,6 @@ return [
     'phone_title' => 'Phone',
     'phone_detail' => '+971 4 123 4567',
     'email_title' => 'Email',
-    'email_detail' => 'hello@luxestay.com',
+    'email_detail' => 'hello@reserhotel.com',
     'success' => 'Your message has been sent successfully!',
 ];

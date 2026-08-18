@@ -6,7 +6,7 @@ return [
     'create_your_account' => 'إنشاء حسابك', 'get_started' => 'ابدأ خلال لحظات قليلة.', 'name' => 'الاسم', 'confirm_password' => 'تأكيد كلمة المرور', 'already_account' => 'لديك حساب بالفعل؟',
     'reset_password' => 'إعادة تعيين كلمة المرور', 'reset_description' => 'أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين.', 'email_reset_link' => 'إرسال رابط إعادة التعيين', 'back_sign_in' => 'العودة لتسجيل الدخول', 'new_password' => 'كلمة المرور الجديدة', 'confirm_new_password' => 'تأكيد كلمة المرور الجديدة', 'choose_password' => 'اختر كلمة مرور جديدة', 'choose_password_description' => 'استخدم كلمة مرور قوية لا تستخدمها في مكان آخر.',
     'check_inbox' => 'تحقق من بريدك الوارد', 'verify_description' => 'أرسلنا رابط تحقق إلى بريدك الإلكتروني. اضغط عليه لتفعيل حسابك.', 'resend_verification' => 'إعادة إرسال رسالة التحقق', 'verification_sent' => 'تم إرسال رابط تحقق جديد.', 'sign_out' => 'تسجيل الخروج',
-    'confirm_your_password' => 'أكد كلمة المرور', 'confirm_description' => 'لأمانك، يرجى تأكيد كلمة المرور قبل المتابعة.', 'authenticated' => 'تم تسجيل الدخول', 'home_welcome' => 'مرحباً، :name.', 'home_text' => 'تطبيقك جاهز للمرحلة التالية من التطوير.', 'app_name' => 'لاكستاي', 'arabic' => 'العربية', 'english' => 'English', 'french' => 'Français',
+    'confirm_your_password' => 'أكد كلمة المرور', 'confirm_description' => 'لأمانك، يرجى تأكيد كلمة المرور قبل المتابعة.', 'authenticated' => 'تم تسجيل الدخول', 'home_welcome' => 'مرحباً، :name.', 'home_text' => 'تطبيقك جاهز للمرحلة التالية من التطوير.', 'app_name' => 'ريزرهوتيل', 'arabic' => 'العربية', 'english' => 'English', 'french' => 'Français',
 
     // Frontend Navigation
     'nav_home' => 'الرئيسية', 'nav_hotels' => 'الفنادق', 'nav_about' => 'من نحن', 'nav_contact' => 'اتصل بنا', 'nav_gallery' => 'المعرض', 'nav_book_now' => 'احجز الآن', 'nav_admin' => 'لوحة التحكم',
@@ -58,19 +58,19 @@ return [
 
     // About Page
     'about_title' => 'من نحن', 'about_subtitle' => 'نصنع تجارب استثنائية منذ عام 2010',
-    'about_story_title' => 'قصتنا', 'about_story_text' => 'وُلدت من شغف بالضيافة الاستثنائية، نمت لاكستاي من ملكية بوتيك واحدة إلى مجموعة عالمية معترف بها من الفنادق الفاخرة. نؤمن بأن كل رحلة تستحق وجهة رائعة.',
+    'about_story_title' => 'قصتنا', 'about_story_text' => 'وُلدت من شغف بالضيافة الاستثنائية، نمت ريزرهوتيل من ملكية بوتيك واحدة إلى مجموعة عالمية معترف بها من الفنادق الفاخرة. نؤمن بأن كل رحلة تستحق وجهة رائعة.',
     'about_mission_title' => 'مهمتنا', 'about_mission_text' => 'خلق لحظات لا تُنسى لكل ضيف من خلال خدمة لا تشوبها شائبة، ومساحات مذهلة، وتجارب أصيلة تحتفي بالشخصية الفريدة لكل وجهة.',
     'about_values_title' => 'قيمنا', 'about_values_subtitle' => 'المبادئ التي توجه كل ما نفعله',
     'about_value_excellence' => 'التميز', 'about_value_excellence_text' => 'نسعى لأعلى المعايير في كل تفصيل، من نوعية الأقمشة إلى خدمة الكونسيرج.',
     'about_value_authenticity' => 'الأصالة', 'about_value_authenticity_text' => 'تعكس كل.property وجهتها، وتقدم غطاءً ثقافيًا أصيلًا.',
     'about_value_sustainability' => 'الاستدامة', 'about_value_sustainability_text' => 'ملتزمون بحماية البيئات والمجتمعات التي نعيش فيها.',
     'about_value_warmth' => 'الدفء', 'about_value_warmth_text' => 'الفخامة الحقيقية هي جعل كل ضيف يشعر أنه عائلة منذ لحظة وصوله.',
-    'about_team_title' => 'فريق القيادة', 'about_team_subtitle' => 'الرواد وراء لاكستاي',
+    'about_team_title' => 'فريق القيادة', 'about_team_subtitle' => 'الرواد وراء ريزرهوتيل',
 
     // Contact Page
     'contact_title' => 'تواصل معنا', 'contact_subtitle' => 'يسعدنا سماع منك. تواصل معنا للاستفسارات أو الحجوزات أو الملاحظات.',
     'contact_form_title' => 'أرسل لنا رسالة', 'contact_form_name' => 'اسمك', 'contact_form_email' => 'البريد الإلكتروني', 'contact_form_subject' => 'الموضوع', 'contact_form_message' => 'رسالتك', 'contact_form_submit' => 'إرسال الرسالة',
-    'contact_info_title' => 'معلومات الاتصال', 'contact_info_address' => '123 شارع الفخامة، دبي، الإمارات', 'contact_info_phone' => '+971 4 123 4567', 'contact_info_email' => 'hello@luxestay.com', 'contact_info_hours' => 'من الأحد للسبت: على مدار الساعة',
+    'contact_info_title' => 'معلومات الاتصال', 'contact_info_address' => '123 شارع الفخامة، دبي، الإمارات', 'contact_info_phone' => '+971 4 123 4567', 'contact_info_email' => 'hello@reserhotel.com', 'contact_info_hours' => 'من الأحد للسبت: على مدار الساعة',
     'contact_success' => 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.',
     'contact_subjects_booking' => 'استفسار حجز', 'contact_subjects_general' => 'استفسار عام', 'contact_subjects_feedback' => 'ملاحظات', 'contact_subjects_support' => 'دعم',
 
@@ -81,7 +81,7 @@ return [
     'gallery_images_count' => ':count صور',
 
     // Footer
-    'footer_about' => 'عن لاكستاي', 'footer_about_text' => 'لاكستاي مجموعة منتقاة من أفخم الفنادق في العالم، تقدم تجارب لا تُنسى في أجمل الوجهات.',
+    'footer_about' => 'عن ريزرهوتيل', 'footer_about_text' => 'ريزرهوتيل مجموعة منتقاة من أفخم الفنادق في العالم، تقدم تجارب لا تُنسى في أجمل الوجهات.',
     'footer_quick_links' => 'روابط سريعة', 'footer_contact' => 'اتصل بنا', 'footer_newsletter' => 'النشرة الإخبارية', 'footer_newsletter_text' => 'اشترك للحصول على عروض حصرية وتحديثات.', 'footer_subscribe' => 'اشترك', 'footer_email_placeholder' => 'أدخل بريدك الإلكتروني',     'footer_rights' => 'جميع الحقوق محفوظة.', 'footer_privacy' => 'سياسة الخصوصية', 'footer_terms' => 'شروط الخدمة',
 
     // Shared
@@ -196,7 +196,7 @@ return [
     'notif_all_read' => 'تم تحديد جميع الإشعارات كمقروءة.',
     'notif_total' => 'الإجمالي',
     'notif_button_not_working' => 'إذا لم يعمل الزر، انسخ هذا الرابط:',
-    'notif_footer' => 'إدارة فنادق لاكستاي. تلقيت هذا لأنه لديك حساب معنا.',
+    'notif_footer' => 'إدارة فنادق ريزرهوتيل. تلقيت هذا لأنه لديك حساب معنا.',
 
     // Notification Email Subjects & Lines
     'notif_hello' => 'مرحباً، :name',
@@ -212,36 +212,36 @@ return [
     'notif_rating' => 'التقييم',
     'notif_comment' => 'التعليق',
     'notif_reply' => 'الرد',
-    'notif_thank_you' => 'شكراً لاختيارك لاكستاي! نتطلع لاستقبالك.',
+    'notif_thank_you' => 'شكراً لاختيارك ريزرهوتيل! نتطلع لاستقبالك.',
     'notif_refund_notice' => 'سيتم معالجة الاسترداد وفقاً لسياسة الإلغاء الخاصة بنا.',
 
     // Booking Notifications
-    'notif_booking_confirmed_subject' => 'تأكيد الحجز - لاكستاي',
+    'notif_booking_confirmed_subject' => 'تأكيد الحجز - ريزرهوتيل',
     'notif_booking_confirmed_line1' => 'تم تأكيد حجزك! إليك التفاصيل:',
-    'notif_booking_cancelled_subject' => 'إلغاء الحجز - لاكستاي',
+    'notif_booking_cancelled_subject' => 'إلغاء الحجز - ريزرهوتيل',
     'notif_booking_cancelled_line1' => 'تم إلغاء حجزك.',
 
     // Payment Notifications
-    'notif_payment_success_subject' => 'تم الدفع بنجاح - لاكستاي',
+    'notif_payment_success_subject' => 'تم الدفع بنجاح - ريزرهوتيل',
     'notif_payment_success_line1' => 'تمت معالجة دفعتك بنجاح.',
-    'notif_payment_failed_subject' => 'فشل الدفع - لاكستاي',
+    'notif_payment_failed_subject' => 'فشل الدفع - ريزرهوتيل',
     'notif_payment_failed_line1' => 'تعذر معالجة دفعتك. يرجى المحاولة مرة أخرى.',
     'notif_payment_retry_cta' => 'يرجى تحديث طريقة الدفع لإتمام الحجز.',
     'notif_view_booking' => 'عرض الحجز',
     'notif_view_invoice' => 'عرض الفاتورة',
 
     // Admin Notifications
-    'notif_admin_new_booking_subject' => 'تنبيه حجز جديد - لاكستاي',
+    'notif_admin_new_booking_subject' => 'تنبيه حجز جديد - ريزرهوتيل',
     'notif_admin_new_booking_line1' => 'تم إجراء حجز جديد!',
-    'notif_admin_new_review_subject' => 'تنبيه تقييم جديد - لاكستاي',
+    'notif_admin_new_review_subject' => 'تنبيه تقييم جديد - ريزرهوتيل',
     'notif_admin_new_review_line1' => 'تم إرسال تقييم جديد!',
     'notif_admin_view_booking' => 'عرض الحجز',
     'notif_admin_view_review' => 'عرض التقييم',
 
     // Review Notifications
-    'notif_review_approved_subject' => 'تمت الموافقة على التقييم - لاكستاي',
+    'notif_review_approved_subject' => 'تمت الموافقة على التقييم - ريزرهوتيل',
     'notif_review_approved_line1' => 'تمت الموافقة على تقييمك وهو الآن مرئي على موقعنا.',
-    'notif_review_reply_subject' => 'رد على تقييمك - لاكستاي',
+    'notif_review_reply_subject' => 'رد على تقييمك - ريزرهوتيل',
     'notif_review_reply_line1' => 'ردت الإدارة على تقييمك.',
     'notif_view_hotel' => 'عرض الفندق',
     // Navigation & Shared

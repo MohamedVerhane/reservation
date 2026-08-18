@@ -8,7 +8,7 @@ return [
     'mission_text' => 'To create unforgettable moments for every guest through impeccable service, stunning spaces, and authentic experiences that celebrate the unique character of each destination.',
     'values_title' => 'Our Values',
     'team_title' => 'Leadership Team',
-    'story_p1' => 'Born from a passion for exceptional hospitality, LuxeStay has grown from a single boutique property into a globally recognized collection of luxury hotels. We believe every journey deserves a remarkable destination.',
+    'story_p1' => 'Born from a passion for exceptional hospitality, ReserHotel has grown from a single boutique property into a globally recognized collection of luxury hotels. We believe every journey deserves a remarkable destination.',
     'story_p2' => 'Over the past decade, we have welcomed thousands of guests from around the world, earning a reputation for excellence in service, design, and authentic local experiences. Our portfolio spans across continents, each property reflecting the unique character of its destination.',
     'value_excellence_title' => 'Excellence',
     'value_excellence_desc' => 'We pursue the highest standards in every detail, from thread count to concierge service.',

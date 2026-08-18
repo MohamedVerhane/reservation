@@ -6,7 +6,7 @@ return [
     'create_your_account' => 'Créez votre compte', 'get_started' => 'Commencez en quelques instants.', 'name' => 'Nom', 'confirm_password' => 'Confirmer le mot de passe', 'already_account' => 'Vous avez déjà un compte ?',
     'reset_password' => 'Réinitialiser votre mot de passe', 'reset_description' => 'Entrez votre e-mail et nous vous enverrons un lien de réinitialisation.', 'email_reset_link' => 'Envoyer le lien de réinitialisation', 'back_sign_in' => 'Retour à la connexion', 'new_password' => 'Nouveau mot de passe', 'confirm_new_password' => 'Confirmer le nouveau mot de passe', 'choose_password' => 'Choisissez un nouveau mot de passe', 'choose_password_description' => 'Utilisez un mot de passe fort que vous n\'utilisez nulle part ailleurs.',
     'check_inbox' => 'Vérifiez votre boîte de réception', 'verify_description' => 'Nous avons envoyé un lien de vérification à votre adresse e-mail. Cliquez dessus pour activer votre compte.', 'resend_verification' => 'Renvoyer l\'e-mail de vérification', 'verification_sent' => 'Un nouveau lien de vérification a été envoyé.', 'sign_out' => 'Se déconnecter',
-    'confirm_your_password' => 'Confirmez votre mot de passe', 'confirm_description' => 'Pour votre sécurité, veuillez confirmer votre mot de passe avant de continuer.', 'authenticated' => 'Authentifié', 'home_welcome' => 'Bienvenue, :name.', 'home_text' => 'Votre application est prête pour la prochaine étape de développement.', 'app_name' => 'LuxeStay', 'arabic' => 'العربية', 'english' => 'English', 'french' => 'Français',
+    'confirm_your_password' => 'Confirmez votre mot de passe', 'confirm_description' => 'Pour votre sécurité, veuillez confirmer votre mot de passe avant de continuer.', 'authenticated' => 'Authentifié', 'home_welcome' => 'Bienvenue, :name.', 'home_text' => 'Votre application est prête pour la prochaine étape de développement.', 'app_name' => 'ReserHotel', 'arabic' => 'العربية', 'english' => 'English', 'french' => 'Français',
 
     // Frontend Navigation
     'nav_home' => 'Accueil', 'nav_hotels' => 'Hôtels', 'nav_about' => 'À propos', 'nav_contact' => 'Contact', 'nav_gallery' => 'Galerie', 'nav_book_now' => 'Réserver', 'nav_admin' => 'Tableau de bord',
@@ -19,7 +19,7 @@ return [
     'home_stats_hotels' => 'Hôtels de Luxe', 'home_stats_rooms' => 'Chambres Premium', 'home_stats_guests' => 'Clients Satisfaits', 'home_stats_awards' => 'Prix Remportés',
     'home_cta_title' => 'Prêt pour un Séjour Inoubliable ?', 'home_cta_text' => 'Réservez vos vacances de rêve aujourd\'hui et vivez le summum de l\'hôtellerie de luxe.', 'home_cta_button' => 'Commencer la Réservation',
     'home_view_all' => 'Voir Tout', 'home_view_details' => 'Voir Détails', 'home_per_night' => '/ nuit', 'home_from' => 'À partir de', 'home_reviews' => 'avis', 'home_night' => 'nuit', 'view_details' => 'Voir Détails',
-    'home_features_title' => 'Pourquoi LuxeStay', 'home_features_subtitle' => 'Chaque séjour, soigneusement pensé pour dépasser vos attentes.',
+    'home_features_title' => 'Pourquoi ReserHotel', 'home_features_subtitle' => 'Chaque séjour, soigneusement pensé pour dépasser vos attentes.',
     'home_feature_price' => 'Meilleur Prix Garanti', 'home_feature_price_text' => 'Trouvé moins cher ailleurs ? Nous égalons le tarif et récompensons votre fidélité.',
     'home_feature_concierge' => 'Conciergerie 24/7', 'home_feature_concierge_text' => 'Assistance permanente de l\'arrivée au départ, dans toutes les langues.',
     'home_feature_clean' => 'Désinfection Premium', 'home_feature_clean_text' => 'Des normes d\'hygiène hospitalières dans chaque chambre, à chaque fois.',
@@ -58,19 +58,19 @@ return [
 
     // About Page
     'about_title' => 'À Propos', 'about_subtitle' => 'Créer des expériences exceptionnelles depuis 2010',
-    'about_story_title' => 'Notre Histoire', 'about_story_text' => 'Née d\'une passion pour l\'hospitalité exceptionnelle, LuxeStay est passée d\'une seule propriété boutique à une collection d\'hôtels de luxe reconnue mondialement. Nous croyons que chaque mérite une destination remarquable.',
+    'about_story_title' => 'Notre Histoire', 'about_story_text' => 'Née d\'une passion pour l\'hospitalité exceptionnelle, ReserHotel est passée d\'une seule propriété boutique à une collection d\'hôtels de luxe reconnue mondialement. Nous croyons que chaque mérite une destination remarquable.',
     'about_mission_title' => 'Notre Mission', 'about_mission_text' => 'Créer des moments inoubliables pour chaque client grâce à un service impeccable, des espaces magnifiques et des expériences authentiques qui célèbrent le caractère unique de chaque destination.',
     'about_values_title' => 'Nos Valeurs', 'about_values_subtitle' => 'Les principes qui guident tout ce que nous faisons',
     'about_value_excellence' => 'Excellence', 'about_value_excellence_text' => 'Nous visons les plus hauts standards dans chaque détail, du fil du linge au service de conciergerie.',
     'about_value_authenticity' => 'Authenticité', 'about_value_authenticity_text' => 'Chaque propriété reflète sa destination, offrant une immersion culturelle authentique.',
     'about_value_sustainability' => 'Durabilité', 'about_value_sustainability_text' => 'Nous nous engageons à protéger les environnements et les communautés où nous opérons.',
     'about_value_warmth' => 'Chaleur', 'about_value_warmth_text' => 'Le vrai luxe consiste à faire sentir chaque client comme chez lui dès son arrivée.',
-    'about_team_title' => 'Équipe de Direction', 'about_team_subtitle' => 'Les visionnaires derrière LuxeStay',
+    'about_team_title' => 'Équipe de Direction', 'about_team_subtitle' => 'Les visionnaires derrière ReserHotel',
 
     // Contact Page
     'contact_title' => 'Contactez-Nous', 'contact_subtitle' => 'Nous serions ravis d\'avoir de vos nouvelles. Contactez-nous pour les réservations, demandes ou commentaires.',
     'contact_form_title' => 'Envoyez-Nous un Message', 'contact_form_name' => 'Votre Nom', 'contact_form_email' => 'Adresse E-mail', 'contact_form_subject' => 'Sujet', 'contact_form_message' => 'Votre Message', 'contact_form_submit' => 'Envoyer le Message',
-    'contact_info_title' => 'Informations de Contact', 'contact_info_address' => '123 Avenue du Luxe, Dubaï, EAU', 'contact_info_phone' => '+971 4 123 4567', 'contact_info_email' => 'hello@luxestay.com', 'contact_info_hours' => 'Lun - Dim : 24h/24',
+    'contact_info_title' => 'Informations de Contact', 'contact_info_address' => '123 Avenue du Luxe, Dubaï, EAU', 'contact_info_phone' => '+971 4 123 4567', 'contact_info_email' => 'hello@reserhotel.com', 'contact_info_hours' => 'Lun - Dim : 24h/24',
     'contact_success' => 'Votre message a été envoyé avec succès ! Nous vous répondrons sous peu.',
     'contact_subjects_booking' => 'Demande de Réservation', 'contact_subjects_general' => 'Demande Générale', 'contact_subjects_feedback' => 'Commentaires', 'contact_subjects_support' => 'Support',
 
@@ -81,7 +81,7 @@ return [
     'gallery_images_count' => ':count images',
 
     // Footer
-    'footer_about' => 'À propos de LuxeStay', 'footer_about_text' => 'LuxeStay est une collection soigneusement sélectionnée des meilleurs hôtels du monde, offrant des expériences inoubliables dans les destinations les plus époustouflantes.',
+    'footer_about' => 'À propos de ReserHotel', 'footer_about_text' => 'ReserHotel est une collection soigneusement sélectionnée des meilleurs hôtels du monde, offrant des expériences inoubliables dans les destinations les plus époustouflantes.',
     'footer_quick_links' => 'Liens Rapides', 'footer_contact' => 'Nous Contacter', 'footer_newsletter' => 'Newsletter', 'footer_newsletter_text' => 'Abonnez-vous pour des offres exclusives et des mises à jour.', 'footer_subscribe' => 'S\'abonner', 'footer_email_placeholder' => 'Entrez votre e-mail',     'footer_rights' => 'Tous droits réservés.', 'footer_privacy' => 'Politique de Confidentialité', 'footer_terms' => 'Conditions d\'Utilisation',
 
     // Shared
@@ -196,7 +196,7 @@ return [
     'notif_all_read' => 'Toutes les notifications marquées comme lues.',
     'notif_total' => 'Total',
     'notif_button_not_working' => 'Si le bouton ne fonctionne pas, copiez ce lien :',
-    'notif_footer' => 'Gestion hôtelière LuxeStay. Vous recevez ceci car vous avez un compte chez nous.',
+    'notif_footer' => 'Gestion hôtelière ReserHotel. Vous recevez ceci car vous avez un compte chez nous.',
 
     // Notification Email Subjects & Lines
     'notif_hello' => 'Bonjour, :name',
@@ -212,36 +212,36 @@ return [
     'notif_rating' => 'Note',
     'notif_comment' => 'Commentaire',
     'notif_reply' => 'Réponse',
-    'notif_thank_you' => 'Merci d\'avoir choisi LuxeStay ! Nous nous réjouissons de vous accueillir.',
+    'notif_thank_you' => 'Merci d\'avoir choisi ReserHotel ! Nous nous réjouissons de vous accueillir.',
     'notif_refund_notice' => 'Un remboursement sera traité selon notre politique d\'annulation.',
 
     // Booking Notifications
-    'notif_booking_confirmed_subject' => 'Réservation confirmée - LuxeStay',
+    'notif_booking_confirmed_subject' => 'Réservation confirmée - ReserHotel',
     'notif_booking_confirmed_line1' => 'Votre réservation a été confirmée ! Voici les détails :',
-    'notif_booking_cancelled_subject' => 'Réservation annulée - LuxeStay',
+    'notif_booking_cancelled_subject' => 'Réservation annulée - ReserHotel',
     'notif_booking_cancelled_line1' => 'Votre réservation a été annulée.',
 
     // Payment Notifications
-    'notif_payment_success_subject' => 'Paiement réussi - LuxeStay',
+    'notif_payment_success_subject' => 'Paiement réussi - ReserHotel',
     'notif_payment_success_line1' => 'Votre paiement a été traité avec succès.',
-    'notif_payment_failed_subject' => 'Échec du paiement - LuxeStay',
+    'notif_payment_failed_subject' => 'Échec du paiement - ReserHotel',
     'notif_payment_failed_line1' => 'Votre paiement n\'a pas pu être traité. Veuillez réessayer.',
     'notif_payment_retry_cta' => 'Veuillez mettre à jour votre mode de paiement pour finaliser votre réservation.',
     'notif_view_booking' => 'Voir la réservation',
     'notif_view_invoice' => 'Voir la facture',
 
     // Admin Notifications
-    'notif_admin_new_booking_subject' => 'Alerte nouvelle réservation - LuxeStay',
+    'notif_admin_new_booking_subject' => 'Alerte nouvelle réservation - ReserHotel',
     'notif_admin_new_booking_line1' => 'Une nouvelle réservation a été effectuée !',
-    'notif_admin_new_review_subject' => 'Alerte nouvel avis - LuxeStay',
+    'notif_admin_new_review_subject' => 'Alerte nouvel avis - ReserHotel',
     'notif_admin_new_review_line1' => 'Un nouvel avis a été soumis !',
     'notif_admin_view_booking' => 'Voir la réservation',
     'notif_admin_view_review' => 'Voir l\'avis',
 
     // Review Notifications
-    'notif_review_approved_subject' => 'Avis approuvé - LuxeStay',
+    'notif_review_approved_subject' => 'Avis approuvé - ReserHotel',
     'notif_review_approved_line1' => 'Votre avis a été approuvé et est maintenant visible sur notre site.',
-    'notif_review_reply_subject' => 'Réponse à votre avis - LuxeStay',
+    'notif_review_reply_subject' => 'Réponse à votre avis - ReserHotel',
     'notif_review_reply_line1' => 'La direction a répondu à votre avis.',
     'notif_view_hotel' => 'Voir l\'hôtel',
     // Navigation & Shared
