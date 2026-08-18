@@ -78,6 +78,15 @@ class Reservation extends Model
     public const STATUS_CANCELLED = 'cancelled';
 
     /** @var list<string> */
+    public const STATUSES = [
+        self::STATUS_PENDING,
+        self::STATUS_CONFIRMED,
+        self::STATUS_CHECKED_IN,
+        self::STATUS_CHECKED_OUT,
+        self::STATUS_CANCELLED,
+    ];
+
+    /** @var list<string> */
     protected $fillable = [
         'user_id',
         'hotel_id',

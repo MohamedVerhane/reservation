@@ -325,19 +325,42 @@ class BookingController extends Controller
     /**
      * Display the authenticated user's reservations.
      */
-    public function myReservations()
+    public function myReservations(Request $request)
     {
-        $reservations = Reservation::where('user_id', Auth::id())
+        $status = $request->string('status')->toString();
+
+        $query = Reservation::where('user_id', Auth::id())
             ->with([
                 'hotel',
                 'room.roomType',
                 'payments',
             ])
-            ->latest()
-            ->paginate(10);
+            ->latest();
+
+        if (in_array($status, Reservation::STATUSES, true)) {
+            $query->where('status', $status);
+        }
+
+        $reservations = $query->paginate(8)->withQueryString();
+
+        $stats = [
+            'total' => $reservations->total(),
+            'upcoming' => Reservation::where('user_id', Auth::id())
+                ->upcoming()
+                ->count(),
+            'nights' => (int) Reservation::where('user_id', Auth::id())
+                ->whereNot('status', Reservation::STATUS_CANCELLED)
+                ->get()
+                ->sum(fn ($r) => $r->nights),
+            'spent' => (float) Reservation::where('user_id', Auth::id())
+                ->whereNot('status', Reservation::STATUS_CANCELLED)
+                ->sum('total_price'),
+        ];
 
         return view('frontend.booking.my-reservations', [
             'reservations' => $reservations,
+            'stats' => $stats,
+            'currentStatus' => $status,
         ]);
     }
 }
